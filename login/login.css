@@ -1,0 +1,41 @@
+.mySection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.leftLogin {
+    background-color: rgb(0, 81, 140, 0.4);
+    /* background-color: #F5CBCD; */
+    /* background-color:  rgba(41,95,78, .25); */
+    height: 400px; 
+    width:600px;
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 5%;
+}
+
+a { 
+    color: inherit; 
+} 
+
+.rightLogin {
+    background-color: rgb(0, 81, 140, 0.2);
+    /* background-color: #00518C; */
+    /* background-color: rgba(244,229,194, .25); */
+    height: 400px; 
+    width: 600px;
+    padding-top: 5%;
+}
+
+.myBtn {
+    width: 50%;
+    background-color: #00518C;
+    color: #F5F5F5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.myBtn:hover {
+    color: #00518C;
+}
