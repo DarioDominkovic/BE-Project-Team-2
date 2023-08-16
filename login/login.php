@@ -3,14 +3,14 @@
     session_start();
     require_once "../components/db_connect.php";
 
-    // if(isset($_SESSION["adm"])){
-    //     header("Location: ../dashboard.php");
-    // }
-    // if(isset($_SESSION["user"])){
-    //     header("Location: ../index.php");
-    // }
+    if(isset($_SESSION["adm"])){
+        header("Location: ../dashboard.php");
+    }
+    if(isset($_SESSION["user"])){
+        header("Location: ../index.php");
+    }
 
-    $email = $password_error = $email_error = "";
+    $email = $username = $password_error = $email_error = $username_error = "";
     $error = false;
 
     function cleanInputs($input){
@@ -23,9 +23,15 @@
 
     if(isset($_POST["login"])) {
         $email = cleanInputs($_POST["email"]);
+        $username = cleanInputs($_POST["username"]);
         $password = $_POST["password"];
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){             // if the provided text is not a format of an email, error will be true
+        if (empty($email) && empty($username)) {
+            $error = true;
+            $username_error = "Email or username is required!";
+        }
+        
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($email)){             // if the provided text is not a format of an email, error will be true
             $error = true ;
             $email_error = "Please enter a valid email address";
         }
@@ -34,9 +40,10 @@
             $error = true;
             $password_error = "Password can't be empty!";
          }
+
         if(!$error) {
             $password = hash("sha256", $password);
-            $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+            $sql = "SELECT * FROM users WHERE (email = '$email' OR username = '$username') AND password = '$password'";
 
             $result = mysqli_query($connect, $sql);
             $row = mysqli_fetch_assoc($result);
@@ -90,9 +97,17 @@
                 <span class="text-danger"><?= $email_error ?></span>
             </div>
 
+            <p><strong>or</strong></p>
+
+            <div class="mb-3 mt-3">
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= $username ?>">
+                <span class="text-danger"><?= $username_error ?></span>
+            </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">Password: </label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Type your password">
                 <span class="text-danger"><?= $password_error ?></span>
             </div>
 

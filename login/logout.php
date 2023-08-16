@@ -3,7 +3,6 @@
 session_start();
 
     if(isset($_GET["logout"])){
-        
         unset($_SESSION["user"]);
         unset($_SESSION["adm"]);
 
@@ -13,5 +12,3 @@ session_start();
         header("Location: login.php");
 }
 
-
-?>
