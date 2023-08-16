@@ -1,5 +1,5 @@
 <?php
-    require_once "../db_connect.php";
+    require_once "../components/db_connect.php";
 
     $id = $_GET["id"]; // to take the value from the parameter "id" in the url 
     $sql = "SELECT * FROM `activity` WHERE id = $id"; // finding the product 
@@ -12,7 +12,7 @@
     $delete = "DELETE FROM `activity` WHERE id = $id"; // query to delete a record from the database
 
     if(mysqli_query($connect, $delete)){
-        header("Location: index.php");
+        header("Location: ../index.php");
     }else {
         echo "Error";
     }

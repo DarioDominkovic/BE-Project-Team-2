@@ -58,10 +58,6 @@
                 <input type="text" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order">
             </div>
             <div class="mb-3 mt-3">
-                <label for="activity_points" class="form-label">Activity points</label>
-                <input type="text" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points">
-            </div>
-            <div class="mb-3 mt-3">
                 <label for="Status" class="form-label">Status</label>
                 <input type="text" class="form-control" id="Status" aria-describedby="status" name="status">
             </div>

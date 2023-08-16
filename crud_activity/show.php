@@ -3,9 +3,9 @@ session_start();
 require_once "../components/db_connect.php";
 
 $row = [];
-if (isset($_GET["x"])) {
-  $id = $_GET["x"];
-$sql = "SELECT * FROM `animal` WHERE id = $id";
+if (isset($_GET["id"])) {
+  $id = $_GET["id"];
+$sql = "SELECT * FROM `activity` WHERE id = $id"; 
 $result = mysqli_query($connect,$sql);
 $row = mysqli_fetch_assoc($result);
 }
@@ -37,7 +37,7 @@ $row = mysqli_fetch_assoc($result);
 </li>
   </ul>
   <div>
-  <a href='index.php?x={$row["id"]}' class='btn btn-success'>Back to Activities</a>
+  <a href='../index.php' class='btn btn-success'>Back to Activities</a>
   </div>
 
 

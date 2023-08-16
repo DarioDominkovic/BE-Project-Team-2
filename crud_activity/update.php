@@ -66,18 +66,21 @@ if (isset($_POST["update"])) {
             </div>
             <div class="mb-3 mt-3">
                 <label for="activity_points" class="form-label">Activity points</label>
-                <input type="text" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
+                <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
             </div>
             <div class="mb-3 mt-3">
-                <label for="Status" class="form-label">Status</label>
-                <input type="text" class="form-control" id="Status" aria-describedby="status" name="status" value="<?= $row["status"] ?>">
+            <label for="Status" class="form-label">Status</label>
+                <select class="form-control" id="Status" name="status">
+                    <option value="done" <?= $row["status"] === "done" ? "selected" : "" ?>>Done</option>
+                    <option value="to_be_done" <?= $row["status"] === "to_be_done" ? "selected" : "" ?>>To be done</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
             <button name="update" type="submit" class="btn btn-primary">Update product</button>
-            <a href="index.php" class="btn btn-warning">Back to home page</a>
+            <a href="../index.php" class="btn btn-warning">Back to home page</a>
         </form>
     </div>
 </body>
