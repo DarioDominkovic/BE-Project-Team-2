@@ -1,6 +1,8 @@
 <?php
 // Including the database connection file
 require_once "../db_connect.php";
+require_once "./component/navbar.php";
+
 
 // Getting the 'id' parameter from the URL using GET method
 $id = $_GET["x"];

@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once "./component/db_connect.php";
+require_once "./component/navbar.php";
 require_once "./component/file_upload.php";
 
-$id = $_GET["x"];
-
-// in navbar before the href (link?)
+$id = $_GET["x"];  // in navbar before the href (link?)update_account.php?x=some_id...
 
 $sql = "SELECT * FROM users WHERE id = $id";
 $result = mysqli_query($connect, $sql);
@@ -18,12 +18,11 @@ if ($result) {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $user_picture = fileUpload($_FILES["user_picture"], "user");
-    $password = $_POST["password"];
     $create_date = $_POST["create_date"];
     $status = $_POST["status"];
 
     if ($row["user_picture"] != "avatar.png") {
-      $picturePath = "../pictures/" . $row["user_picture"];
+      $picturePath = "./pictures/" . $row["user_picture"];
       if (file_exists($picturePath)) {
         if (unlink($picturePath)) {
           echo "<div class='text-center bg-info'>Previous picture deleted successfully.</div>";
@@ -33,7 +32,7 @@ if ($result) {
       }
     }
 
-    $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`password`='$password',`create_date`='$create_date',`status`='$status' WHERE id = $id";
+    $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`='$create_date',`status`='$status' WHERE id = $id";
 
     if (mysqli_query($connect, $sql)) {
       echo "<div class='text-center bg-success'>Success! User details updated.</div>";
@@ -58,9 +57,9 @@ if ($result) {
 
 <body>
   <!-- navbar starts -->
-  <?php include './components/navbar.php'; ?>
+  <?= $navbar ?>
 
-  <!-- navbar starts -->
+  <!-- navbar ends -->
 
 
   <div class="container mt-5">
@@ -89,10 +88,7 @@ if ($result) {
         <label for="user_picture" class="form-label">User picture</label>
         <input type="file" class="form-control" name="user_picture" area-describility="user_picture" id="user_picture" value="<?php echo $row["user_picture"]; ?>" />
       </div>
-      <div class="mb-3 mt-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="text" class="form-control" name="password" area-describility="password" id="password" value="<?php echo $row["password"]; ?>" />
-      </div>
+
       <div class="mb-3 mt-3">
         <label for="create_date" class="form-label">Date of Creation</label>
         <input type="text" class="form-control" name="create_date" area-describility="create_date" id="create_date" value="<?php echo $row["create_date"]; ?>" />
