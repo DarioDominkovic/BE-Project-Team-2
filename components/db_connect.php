@@ -3,7 +3,7 @@
     $localhost = "127.0.0.1";
     $username = "root";
     $password = "";
-    $dbname = "morning routine manager";
+    $dbname = "morning_routine_manager";
 
     // create connection
     $connect = mysqli_connect($localhost, $username, $password, $dbname);
