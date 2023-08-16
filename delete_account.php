@@ -50,7 +50,7 @@ if (isset($_GET["confirm"]) && $_GET["confirm"] === "yes") {
   <h2>Delete Confirmation</h2>
   <p>Are you sure you want to delete this user</p>
   <!-- Display the photo using an <img> tag -->
-  <img src="../pictures/<?php echo $row["image"]; ?>" alt="<?php echo $row["title"]; ?>" width="200" height="200">
+  <img src="../pictures/<?php echo $row["user_picture"]; ?>" alt="<?php echo $row["username"]; ?>" width="200" height="200">
   <p>
     <a href="delete.php?x=<?php echo $id; ?>&confirm=yes">Yes</a> |
     <a href="dashboard.php">No</a>
