@@ -69,12 +69,18 @@ if (isset($_POST["update"])) {
                 <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
             </div>
             <div class="mb-3 mt-3">
-            <label for="Status" class="form-label">Status</label>
-                <select class="form-control" id="Status" name="status">
-                    <option value="done" <?= $row["status"] === "done" ? "selected" : "" ?>>Done</option>
-                    <option value="to_be_done" <?= $row["status"] === "to_be_done" ? "selected" : "" ?>>To be done</option>
-                </select>
+        <label for="status" class="form-label">Activity Status</label>
+        <fieldset>
+            <div>
+                <input type="radio" name="status" value="1" <?= ($row["status"] == 1) ? "checked" : ""; ?> />
+                <label for="status">Done</label>
             </div>
+            <div>
+                <input type="radio" name="status" value="0" <?= ($row["status"] == 0) ? "checked" : ""; ?> />
+                <label for="status">Not Done</label>
+            </div>
+        </fieldset>
+    </div>
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">

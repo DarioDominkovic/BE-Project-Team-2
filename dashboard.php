@@ -2,6 +2,10 @@
 
 require_once "components/db_connect.php";
 
+$raus = "../";
+$rein ="";
+require_once "components/navbar.php";
+
 $sql = "SELECT * FROM users";
 $result = mysqli_query($connect, $sql);
 
@@ -114,8 +118,7 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 </head>
 
 <body>
-    <!-- <h1>Navbar</h1> -->
-    <?php include 'components/navbar.php'; ?>
+    <?php echo $navbar ?>
 
     <h1>Users</h1>
 

@@ -33,7 +33,7 @@
             if(isset($_SESSION["user"]) || isset($_SESSION["adm"])){
             $navbar .= "&nbsp;&nbsp;";
             $navbar.="
-            <a class='nav-link' href='{$raus}logout.php?logout'>Logout</a>";
+            <a class='nav-link' href='{$raus}/login/logout.php?logout'>Logout</a>";
             }
             $navbar.="
         </div>

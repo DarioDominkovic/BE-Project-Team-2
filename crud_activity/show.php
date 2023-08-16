@@ -2,6 +2,10 @@
 session_start();
 require_once "../components/db_connect.php";
 
+$raus = "../";
+$rein ="";
+require_once "../components/navbar.php";
+
 $row = [];
 if (isset($_GET["id"])) {
   $id = $_GET["id"];
@@ -20,6 +24,9 @@ $row = mysqli_fetch_assoc($result);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
+
+<?php echo $navbar ?>
+
  <div class="container">
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
       <div>
@@ -31,13 +38,16 @@ $row = mysqli_fetch_assoc($result);
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><p>Duration: <?= isset($row["duration"]) ? $row["duration"] : "" ?></p></li>
-    <li class="list-group-item"><p>Status: <?= isset($row["status"]) ? $row["status"] : "" ?></p></li>
+    <li class="list-group-item"><p>Status: <?=( $row["status"] == 1) ? 'Done' : 'Not Done' ?></p></li>
     <li class="list-group-item"><p>Activity_Points: <?= isset($row["activity_points"]) ? $row["activity_points"] : "" ?></p></li>
     <li class="list-group-item"><p>Activity_Order: <?= isset($row["activity_order"]) ? $row["activity_order"] : "" ?></p></li>
 </li>
   </ul>
   <div>
   <a href='../index.php' class='btn btn-success'>Back to Activities</a>
+  </div>
+  <div>
+  <a href="../routine.php?id=<?php echo $row['id']; ?>" class="btn btn-danger ms-2">Add to Morning Routine</a>
   </div>
 
 

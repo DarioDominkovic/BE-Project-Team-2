@@ -1,6 +1,10 @@
 <?php
 
     session_start();
+
+    $raus = "../";
+    $rein ="";
+    require_once "../components/navbar.php";
     
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){ // if the session user and the session adm have no value
         header("Location: ../login/login.php"); // redirect the user to the home page
@@ -42,6 +46,9 @@
 
 </head>
 <body>
+
+    <?php echo $navbar ?>
+
     <div class="container mt-5">
         <h2>Create a new Activity</h2>
         <form method="POST" enctype="multipart/form-data">
