@@ -6,13 +6,29 @@ require_once "./components/file_upload.php";
 
 $id = $_GET["id"];  // in navbar before the href (link?)update_account.php?x=some_id...
 
-$sql = "SELECT * FROM users WHERE id = $id";
+// Check if the user is logged in
+if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
+  // Redirect unauthorized users to a login page or display an error message
+  header("Location: {$raus}login.php");
+  exit;
+}
+
+// If user is not an admin and trying to access another user's account
+if (!isset($_SESSION["admin"]) && $_SESSION["user"] != $idToUpdate) {
+  // Redirect to an error page or display an error message
+  header("Location: {$raus}access_denied.php");
+  exit;
+}
+
+// Fetch user details for the specified user ID
+$sql = "SELECT * FROM users WHERE id = $idToUpdate";
 $result = mysqli_query($connect, $sql);
 
 if ($result) {
   $row = mysqli_fetch_assoc($result);
 
   if (isset($_POST["update_user"])) {
+    // Update user account details
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $username = $_POST["username"];
@@ -21,6 +37,7 @@ if ($result) {
     $create_date = $_POST["create_date"];
     $status = $_POST["status"];
 
+    // Delete previous user picture if not default
     if ($row["user_picture"] != "avatar.png") {
       $picturePath = "./pictures/" . $row["user_picture"];
       if (file_exists($picturePath)) {
@@ -32,9 +49,10 @@ if ($result) {
       }
     }
 
-    $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`='$create_date',`status`='$status' WHERE id = $id";
+    // Perform the update query
+    $sqlUpdate = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`='$create_date',`status`='$status' WHERE id = $idToUpdate";
 
-    if (mysqli_query($connect, $sql)) {
+    if (mysqli_query($connect, $sqlUpdate)) {
       echo "<div class='text-center bg-success'>Success! User details updated.</div>";
     } else {
       echo "<div class='text-center bg-danger'>Error updating user details: " . mysqli_error($connect) . "</div>";
