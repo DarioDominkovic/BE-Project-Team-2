@@ -9,7 +9,7 @@
     background-color: rgb(0, 81, 140, 0.4);
     /* background-color: #F5CBCD; */
     /* background-color:  rgba(41,95,78, .25); */
-    height: 400px; 
+    height: 500px; 
     width:600px;
     padding-left: 5%;
     padding-top: 5%;
@@ -24,7 +24,7 @@ a {
     background-color: rgb(0, 81, 140, 0.2);
     /* background-color: #00518C; */
     /* background-color: rgba(244,229,194, .25); */
-    height: 400px; 
+    height: 500px; 
     width: 600px;
     padding-top: 5%;
 }

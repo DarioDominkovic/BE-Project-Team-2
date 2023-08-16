@@ -2,12 +2,12 @@
 
     session_start();
 
-    // if(isset($_SESSION["adm"])){
-    //     header("Location: login.php");
-    // }
-    // if(isset($_SESSION["user"])){
-    //     header("Location: login.php");
-    // }
+    if(isset($_SESSION["adm"])){
+        header("Location: ../dashboard.php");
+    }
+    if(isset($_SESSION["user"])){
+        header("Location: ../index.php");
+    }
 
     require_once "../components/db_connect.php";
     require_once "../components/file_upload.php";
@@ -90,7 +90,7 @@
 
         if(!$error){
             $password = hash("sha256", $password);
-            $sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `users_picture`, `password`) VALUES ('$fname','$lname','$username','$email','$picture[0]', '$password')";
+            $sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `user_picture`, `password`) VALUES ('$fname','$lname','$username','$email','$picture[0]', '$password')";
 
             $result = mysqli_query($connect, $sql);
 
@@ -155,7 +155,7 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Type your password">
                 <span class="text-danger"><?= $password_error ?></span>
             </div>
             <button name="sign-up" type="submit" class="btn mt-3 myBtn">Create account</button>
