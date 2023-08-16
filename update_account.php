@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once "./component/db_connect.php";
-require_once "./component/navbar.php";
-require_once "./component/file_upload.php";
+require_once "./components/db_connect.php";
+require_once "./components/navbar.php";
+require_once "./components/file_upload.php";
 
-$id = $_GET["x"];  // in navbar before the href (link?)update_account.php?x=some_id...
+$id = $_GET["id"];  // in navbar before the href (link?)update_account.php?x=some_id...
 
 $sql = "SELECT * FROM users WHERE id = $id";
 $result = mysqli_query($connect, $sql);
