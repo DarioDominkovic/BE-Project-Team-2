@@ -42,7 +42,7 @@ if (isset($_SESSION["user"])) {
     $navbar .= "
             
             <li class='nav-item'>
-                <a class='nav-link' href='{$raus}../update_account.php' class='btn btn-primary'>Update My Admin</a>
+                <a class='nav-link' href='{$raus}update_account.php' class='btn btn-primary'>Update My Admin</a>
             </li>";
 }
 
