@@ -17,7 +17,7 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
-
+ <link rel="stylesheet" href="/components/navbar.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,11 +31,6 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
     <title>Activities</title>
 </head>
 <style>
-    body {
-        font-family: sans-serif;
-        background-color: #3d8865;
-    }
-
     h1 {
         padding: 15px;
         background-color: #fbd17d;
