@@ -72,8 +72,8 @@
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="create" type="submit" class="btn btn-primary">Create product</button>
-            <a href="index.php" class="btn btn-warning">Back to home page</a>
+            <button name="create" type="submit" class="btn btn-primary">CREATE ACTIVITY</button>
+            <a href="../index.php" class="btn btn-warning">BACK TO ACTIVITY LIST</a>
         </form>
     </div>
     

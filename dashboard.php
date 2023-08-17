@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once "components/db_connect.php";
 
 $raus = "../";
@@ -8,7 +8,7 @@ require_once "components/navbar.php";
 
 $sql = "SELECT * FROM users";
 $result = mysqli_query($connect, $sql);
-
+    
 $sql_name = "SELECT DISTINCT fname FROM users";
 $result_name = mysqli_query($connect, $sql_name);
 $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
@@ -116,8 +116,9 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
 </style>
 </head>
-
 <body>
+
+    <!-- Navbar -->
     <?php echo $navbar ?>
 
     <h1>Users</h1>

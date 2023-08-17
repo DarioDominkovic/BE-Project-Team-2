@@ -1,41 +1,26 @@
 <?php
-
     session_start();
-
+    require_once "components/db_connect.php";
 
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
         header("Location: login.php");
     }
 
-    require_once "components/db_connect.php";
-
-
-
     $id = $_GET["id"];
-
     $sql = "select * from `users` WHERE id=$id";
-    
     $result = mysqli_query($connect, $sql);
-
     $row = mysqli_fetch_assoc($result);
-
-
-
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-</head>
-<body>
-
-
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    </head>
+    <body>
 
     <section class="mySection">
     <div class="container py-5 h-100">

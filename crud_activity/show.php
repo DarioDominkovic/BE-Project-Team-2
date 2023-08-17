@@ -14,13 +14,13 @@ $result = mysqli_query($connect,$sql);
 $row = mysqli_fetch_assoc($result);
 }
 ?>;
-
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Activity Profile</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
@@ -44,10 +44,10 @@ $row = mysqli_fetch_assoc($result);
 </li>
   </ul>
   <div>
-  <a href='../index.php' class='btn btn-success'>Back to Activities</a>
+  <a href='../index.php' class='btn btn-success'>BACK TO ACTIVITY LIST</a>
   </div>
   <div>
-  <a href="../routine.php?id=<?php echo $row['id']; ?>" class="btn btn-danger ms-2">Add to Morning Routine</a>
+  <a href="../routine.php?id=<?php echo $row['id']; ?>" class="btn btn-danger ms-2">ADD TO ROUTINE</a>
   </div>
 
 

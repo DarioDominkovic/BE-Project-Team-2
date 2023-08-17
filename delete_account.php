@@ -5,7 +5,7 @@ require_once "./component/navbar.php";
 
 
 // Getting the 'id' parameter from the URL using GET method
-$id = $_GET["x"];
+$id = $_GET["id"];
 
 // Check if the 'id' parameter is provided and it is a number
 if (!isset($id) || !is_numeric($id)) {
