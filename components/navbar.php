@@ -1,4 +1,5 @@
 <?php
+$raus = "../";
 $navbar = "
 <nav class='navbar navbar-expand-lg bg-body-tertiary'>
     <div class='container-fluid'>
@@ -34,9 +35,14 @@ if (isset($_SESSION["adm"])) {
     $navbar .= "
             <li class='nav-item'>
                 <a class='nav-link' href='{$raus}user_account.php'>Dashboard</a>
-            </li>
+            </li>";
+}
+if (isset($_SESSION["user"])) {
+    $id = $_SESSION["user"];
+    $navbar .= "
+            
             <li class='nav-item'>
-                <a class='nav-link' href='{$raus}update_account.php?x={$id}' class='btn btn-primary'>Update My Admin</a>
+                <a class='nav-link' href='{$raus}../update_account.php' class='btn btn-primary'>Update My Admin</a>
             </li>";
 }
 
