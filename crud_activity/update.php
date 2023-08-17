@@ -5,6 +5,8 @@ if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){ // if the session use
 }
 require_once "../components/db_connect.php";
 require_once "../components/file_upload.php";
+require_once "../components/navbar.php";
+
     $id = $_GET["id"];
     $sql = "SELECT * FROM `activity` WHERE id = $id";
     $result = mysqli_query($connect, $sql);
@@ -50,6 +52,9 @@ if (isset($_POST["update"])) {
 </head>
 <body>
     <div class="container mt-5">
+
+    <?php echo $navbar ?>
+
         <h2>Update Activity</h2>
         <form method="POST" enctype="multipart/form-data">
         <div class="mb-3 mt-3">

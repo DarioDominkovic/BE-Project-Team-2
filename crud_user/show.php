@@ -1,12 +1,12 @@
 <?php
     session_start();
-    require_once "components/db_connect.php";
+    require_once "../components/db_connect.php";
 
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
         header("Location: login.php");
     }
 
-    $id = $_GET["id"];
+    $id = $_GET["id"];  
     $sql = "select * from `users` WHERE id=$id";
     $result = mysqli_query($connect, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -26,7 +26,7 @@
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
         <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src='pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage' alt='media-cover' style='width: 50%; margin-left:100px;' >
+        <img src='pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage' alt='User Picture' style='width: 50%; margin-left:100px;' >
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
             <form>
@@ -38,7 +38,8 @@
             <p>Email: <?php echo $row["email"] ?></p>
             <hr>
             <p>Not correct? Change it!</p>
-            <p><a href="update_account.php?id=$id" class="btn btn-dark" style="width:100%">Update data</a></p>
+            <p><a href="../index.php" class="btn btn-dark" style="width:100%">Back</a></p>
+            <p><a href="update.php?id" class="btn btn-primary" style="width:100%">Update</a></p>
             </form>
         </div>
         </div>

@@ -1,21 +1,23 @@
 <?php
 session_start();
-require_once "./components/db_connect.php";
-require_once "./components/navbar.php";
-require_once "./components/file_upload.php";
+$raus = "../";
+$rein ="";
+require_once "../components/db_connect.php";
+require_once "../components/navbar.php";
+require_once "../components/file_upload.php";
 
 $idToUpdate = $_GET["id"];
 if (isset($_SESSION["user"])) {
   $idToUpdate = $_SESSION["user"];
 } // Check if the user is logged in
-if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
+if (!isset($_SESSION["user"]) && !isset($_SESSION["adm"])) {
   // Redirect unauthorized users to a login page or display an error message
-  header("Location: {$raus}login.php");
+  header("Location: {$raus}/login/login.php");
   exit;
 }
 
 // If user is not an admin and trying to access another user's account
-if (!isset($_SESSION["admin"]) && $_SESSION["user"] != $idToUpdate) {
+if (!isset($_SESSION["adm"]) && $_SESSION["user"] != $idToUpdate) {
   // Redirect to an error page or display an error message
   header("Location: {$raus}access_denied.php");
   exit;

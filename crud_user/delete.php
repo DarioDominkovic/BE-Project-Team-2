@@ -1,8 +1,9 @@
 <?php
-// Including the database connection file
-require_once "../db_connect.php";
-require_once "./component/navbar.php";
+session_start();
 
+// Including the database connection file
+require_once "../components/db_connect.php";
+require_once "../components/navbar.php";  
 
 // Getting the 'id' parameter from the URL using GET method
 $id = $_GET["id"];
@@ -31,7 +32,7 @@ if (isset($_GET["confirm"]) && $_GET["confirm"] === "yes") {
   // Executing the DELETE query
   if (mysqli_query($connect, $delete)) {
     // If the deletion is successful, redirect the user to the dashboard.php page
-    header("Location: dashboard.php");
+    header("Location: ../dashboard.php");
     exit; // Terminate the script to prevent further execution
   } else {
     // If an error occurs during deletion, display the error message
@@ -54,8 +55,8 @@ if (isset($_GET["confirm"]) && $_GET["confirm"] === "yes") {
   <!-- Display the photo using an <img> tag -->
   <img src="../pictures/<?php echo $row["user_picture"]; ?>" alt="<?php echo $row["username"]; ?>" width="200" height="200">
   <p>
-    <a href="delete.php?x=<?php echo $id; ?>&confirm=yes">Yes</a> |
-    <a href="dashboard.php">No</a>
+    <a href="delete.php?id=<?php echo $id; ?>&confirm=yes">Yes</a> |
+    <a href="../dashboard.php">No</a>
   </p>
 </body>
 

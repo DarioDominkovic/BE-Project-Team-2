@@ -10,7 +10,7 @@ $navbar = "
             <ul class='navbar-nav me-auto mb-2 mb-lg-0'>";
 
 if (isset($_SESSION["user"]) || isset($_SESSION["adm"])) {
-    $navbar .= "
+    $navbar .= "    
                 <li class='nav-item'>
                     <a class='nav-link active' aria-current='page' href='{$raus}index.php'>Activities</a>
                 </li>";
@@ -20,7 +20,7 @@ if (isset($_SESSION["user"])) {
     $id = $_SESSION["user"];
     $navbar .= "
                 <li class='nav-item'>
-                    <a class='nav-link' href='{$raus}user_account.php?id=$id'>Profile</a>
+                    <a class='nav-link' href='{$raus}/crud_user/show.php?id=$id'>Profile</a>
                 </li>  
                 <li class='nav-item'>
                     <a class='nav-link' href='{$raus}routine.php'>My Routine</a>
@@ -34,15 +34,7 @@ if (isset($_SESSION["adm"])) {
     $id = $_SESSION["adm"];
     $navbar .= "
             <li class='nav-item'>
-                <a class='nav-link' href='{$raus}user_account.php'>Dashboard</a>
-            </li>";
-}
-if (isset($_SESSION["user"])) {
-    $id = $_SESSION["user"];
-    $navbar .= "
-            
-            <li class='nav-item'>
-                <a class='nav-link' href='{$raus}update_account.php' class='btn btn-primary'>Update My Admin</a>
+                <a class='nav-link' href='{$raus}dashboard.php'>Dashboard</a>
             </li>";
 }
 
