@@ -4,9 +4,10 @@ require_once "./components/db_connect.php";
 require_once "./components/navbar.php";
 require_once "./components/file_upload.php";
 
-$id = $_GET["id"];  // in navbar before the href (link?)update_account.php?x=some_id...
-
-// Check if the user is logged in
+$idToUpdate = $_GET["id"];
+if (isset($_SESSION["user"])) {
+  $idToUpdate = $_SESSION["user"];
+} // Check if the user is logged in
 if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
   // Redirect unauthorized users to a login page or display an error message
   header("Location: {$raus}login.php");
