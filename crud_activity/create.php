@@ -1,43 +1,44 @@
 <?php
 
-    session_start();
+session_start();
 
-    $raus = "../";
-    $rein ="";
-    require_once "../components/navbar.php";
-    
-    if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){ // if the session user and the session adm have no value
-        header("Location: ../login/login.php"); // redirect the user to the home page
-    }
-    
-    require_once "../components/db_connect.php";
-    require_once "../components/file_upload.php";
+$raus = "../";
+$rein = "";
+require_once "../components/navbar.php";
 
-    if(isset($_POST["create"])){
-        $name = $_POST["name"];
-        $duration = $_POST["duration"];
-        $activity_order = $_POST["activity_order"];
-        $status = $_POST["status"];
-        $activity_pictures = $_POST["activity_pictures"];
-        $activity_points = $_POST["activity_points"];
-        $activity_picture = fileUpload($_FILES["activity_picture"]);
+if (!isset($_SESSION["user"]) && !isset($_SESSION["adm"])) { // if the session user and the session adm have no value
+    header("Location: ../login/login.php"); // redirect the user to the home page
+}
 
-        $sql = "INSERT INTO activity (`name`, `duration`, `activity_order`, `status`, `activity_picture`, `activity_points`) VALUES ('$name','$duration','$activity_order', '$status', '{$activity_picture[0]}', '$activity_points')";
-        if(mysqli_query($connect, $sql)){
-            echo "<div class='alert alert-success' role='alert'>
+require_once "../components/db_connect.php";
+require_once "../components/file_upload.php";
+
+if (isset($_POST["create"])) {
+    $name = $_POST["name"];
+    $duration = $_POST["duration"];
+    $activity_order = $_POST["activity_order"];
+    $status = $_POST["status"];
+    $activity_pictures = $_POST["activity_pictures"];
+    $activity_points = $_POST["activity_points"];
+    $activity_picture = fileUpload($_FILES["activity_picture"]);
+
+    $sql = "INSERT INTO activity (`name`, `duration`, `activity_order`, `status`, `activity_picture`, `activity_points`) VALUES ('$name','$duration','$activity_order', '$status', '{$activity_picture[0]}', '$activity_points')";
+    if (mysqli_query($connect, $sql)) {
+        echo "<div class='alert alert-success' role='alert'>
             New record has been created, {$activity_picture[1]}
           </div>";
-          header("refresh: 3; url= ../index.php");
-        }else {
-            echo "<div class='alert alert-danger' role='alert'>
+        header("refresh: 3; url= ../index.php");
+    } else {
+        echo "<div class='alert alert-danger' role='alert'>
             error found, {$activity_picture[1]}
           </div>";
-        }
     }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +46,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
+
 <body>
 
     <?php echo $navbar ?>
@@ -72,10 +74,11 @@
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="create" type="submit" class="btn btn-primary">CREATE ACTIVITY</button>
-            <a href="../index.php" class="btn btn-warning">BACK TO ACTIVITY LIST</a>
+            <button name="create" type="submit" class="btn btn-outline-primary">CREATE ACTIVITY</button>
+            <a href="../index.php" class="btn btn-outline-secondary">BACK TO ACTIVITY LIST</a>
         </form>
     </div>
-    
+
 </body>
+
 </html>

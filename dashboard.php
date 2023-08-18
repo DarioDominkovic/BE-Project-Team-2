@@ -3,12 +3,12 @@ session_start();
 require_once "components/db_connect.php";
 
 $raus = "../";
-$rein ="";
+$rein = "";
 require_once "components/navbar.php";
 
 $sql = "SELECT * FROM users";
 $result = mysqli_query($connect, $sql);
-    
+
 $sql_name = "SELECT DISTINCT fname FROM users";
 $result_name = mysqli_query($connect, $sql_name);
 $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
@@ -113,9 +113,9 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
     .card:hover .buttons {
         opacity: 1;
     }
-
 </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -146,14 +146,14 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
                             <h4 class="card-title position-absolute bottom-0 start-0 mb-2 mx-2" style="color: white; font-size: 25px;"><?php echo $row['fname']; ?></h4>
                             <div class="buttons d-flex justify-content-center">
-                                <a href="crud_user/show.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Show</a>
-                                <a href="crud_user/update.php?id=<?php echo $row['id']; ?>" class="btn btn-primary ms-2">Edit</a>
-                                <a href="crud_user/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger ms-2">Delete</a>
+                                <a href="crud_user/show.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success">Show</a>
+                                <a href="crud_user/update.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary ms-2">Edit</a>
+                                <a href="crud_user/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
                             </div>
-                        </div>      
+                        </div>
 
                     </div>
-            <?php   
+            <?php
                 }
             } else {
                 echo '<div class="col"><p>Media not found.</p></div>';

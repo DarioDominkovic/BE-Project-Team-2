@@ -40,9 +40,9 @@ $row = mysqli_fetch_assoc($result);
                         <p>Email: <?php echo $row["email"] ?></p>
                         <hr>
                         <p>Not correct? Change it!</p>
-                        <p><a href="../index.php" class="btn btn-dark" style="width:100%">Back</a></p>
-                        <p><a href="../resetpassword.php" class="btn btn-dark" style="width:100%">ResetPassword</a></p>
-                        <p><a href="update.php?id" class="btn btn-primary" style="width:100%">Update</a></p>
+                        <p><a href="../index.php" class="btn btn-outline-dark" style="width:100%">Back</a></p>
+                        <p><a href="../resetpassword.php" class="btn btn-outline-secondary" style="width:100%">ResetPassword</a></p>
+                        <p><a href="update.php?id" class="btn btn-outline-success" style="width:100%">Update</a></p>
                     </form>
                 </div>
             </div>

@@ -1,16 +1,16 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){ // if the session user and the session adm have no value
-  header("Location: ../login/login.php"); // redirect the user to the home page
+if (!isset($_SESSION["user"]) && !isset($_SESSION["adm"])) { // if the session user and the session adm have no value
+    header("Location: ../login/login.php"); // redirect the user to the home page
 }
 require_once "../components/db_connect.php";
 require_once "../components/file_upload.php";
 require_once "../components/navbar.php";
 
-    $id = $_GET["id"];
-    $sql = "SELECT * FROM `activity` WHERE id = $id";
-    $result = mysqli_query($connect, $sql);
-    $row = mysqli_fetch_assoc($result);
+$id = $_GET["id"];
+$sql = "SELECT * FROM `activity` WHERE id = $id";
+$result = mysqli_query($connect, $sql);
+$row = mysqli_fetch_assoc($result);
 if (isset($_POST["update"])) {
     /* taking values from inputs */
     $name = $_POST["name"];
@@ -26,9 +26,8 @@ if (isset($_POST["update"])) {
             unlink("../pictures/$row[activity_picture]");
         }
         $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`status`='$status',`activity_picture`='$activity_picture[0]' WHERE id={$id}";
-    }
-    else {
-      $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`status`='$status' WHERE id={$id}";
+    } else {
+        $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`status`='$status' WHERE id={$id}";
     }
     if (mysqli_query($connect, $sql)) {
         echo "<div class='alert alert-success' role='alert'>
@@ -44,20 +43,22 @@ if (isset($_POST["update"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container mt-5">
 
-    <?php echo $navbar ?>
+        <?php echo $navbar ?>
 
         <h2>Update Activity</h2>
         <form method="POST" enctype="multipart/form-data">
-        <div class="mb-3 mt-3">
+            <div class="mb-3 mt-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" aria-describedby="name" name="name" value="<?= $row["name"] ?>">
             </div>
@@ -74,25 +75,26 @@ if (isset($_POST["update"])) {
                 <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
             </div>
             <div class="mb-3 mt-3">
-        <label for="status" class="form-label">Activity Status</label>
-        <fieldset>
-            <div>
-                <input type="radio" name="status" value="1" <?= ($row["status"] == 1) ? "checked" : ""; ?> />
-                <label for="status">Done</label>
+                <label for="status" class="form-label">Activity Status</label>
+                <fieldset>
+                    <div>
+                        <input type="radio" name="status" value="1" <?= ($row["status"] == 1) ? "checked" : ""; ?> />
+                        <label for="status">Done</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="status" value="0" <?= ($row["status"] == 0) ? "checked" : ""; ?> />
+                        <label for="status">Not Done</label>
+                    </div>
+                </fieldset>
             </div>
-            <div>
-                <input type="radio" name="status" value="0" <?= ($row["status"] == 0) ? "checked" : ""; ?> />
-                <label for="status">Not Done</label>
-            </div>
-        </fieldset>
-    </div>
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="update" type="submit" class="btn btn-primary">Update product</button>
-            <a href="../index.php" class="btn btn-warning">Back to home page</a>
+            <button name="update" type="submit" class="btn btn-outline-primary">Update product</button>
+            <a href="../index.php" class="btn btn-outline-secondary">Back to home page</a>
         </form>
     </div>
 </body>
+
 </html>

@@ -4,6 +4,8 @@ session_start();
 
 require_once "./components/db_connect.php";
 $error = '';
+$errorNew = '';
+
 
 if (isset($_POST["reset"])) {
   $oldPass = $_POST["oldPass"];

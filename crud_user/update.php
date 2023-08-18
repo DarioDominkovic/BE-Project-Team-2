@@ -1,7 +1,7 @@
 <?php
 session_start();
 $raus = "../";
-$rein ="";
+$rein = "";
 require_once "../components/db_connect.php";
 require_once "../components/navbar.php";
 require_once "../components/file_upload.php";
@@ -118,7 +118,7 @@ if ($result) {
         <label for="status" class="form-label">Status</label>
         <input type="text" class="form-control" name="status" area-describility="status" id="status" value="<?php echo $row["status"]; ?>" />
       </div>
-      <button type="submit" name="update_user" class="btn btn-primary">UPDATE USER</button>
+      <button type="submit" name="update_user" class="btn btn-outline-secondary">UPDATE USER</button>
     </form>
   </div>
 

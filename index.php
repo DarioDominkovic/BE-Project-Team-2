@@ -1,9 +1,9 @@
 <?php
-session_start();    
+session_start();
 require_once "components/db_connect.php";
 
 $raus = "../";
-$rein ="";
+$rein = "";
 require_once "components/navbar.php";
 
 $sql = "SELECT * FROM activity";
@@ -17,7 +17,8 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
- <link rel="stylesheet" href="/components/navbar.css">
+<link rel="stylesheet" href="/components/navbar.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,7 +109,6 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
     .card:hover .buttons {
         opacity: 1;
     }
-
 </style>
 </head>
 
@@ -142,11 +142,11 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
                             <h4 class="card-title position-absolute bottom-0 start-0 mb-2 mx-2" style="color: white; font-size: 25px;"><?php echo $row['name']; ?></h4>
                             <div class="buttons d-flex justify-content-center">
-                                <a href="crud_activity/show.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Show</a>
-                                <a href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn btn-primary ms-2">Edit</a>
-                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger ms-2">Delete</a>
+                                <a href="crud_activity/show.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success">Show</a>
+                                <a href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary ms-2">Edit</a>
+                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
                             </div>
-                        </div>      
+                        </div>
 
                     </div>
             <?php
@@ -159,7 +159,7 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
     </div>
 
     <div class="container center-screen">
-        <a href="crud_activity/create.php" class="btn btn-primary"> ADD MORE ACTIVITES </a>
+        <a href="crud_activity/create.php" class="btn btn-outline-secondary"> ADD MORE ACTIVITES </a>
     </div>
 
     <!-- Add Bootstrap JS -->

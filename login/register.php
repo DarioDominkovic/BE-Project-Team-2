@@ -158,7 +158,7 @@ if (isset($_POST["sign-up"])) {
                             <input type="password" class="form-control" id="password" name="password" placeholder="Type your password">
                             <span class="text-danger"><?= $password_error ?></span>
                         </div>
-                        <button name="sign-up" type="submit" class="btn mt-3 myBtn">Create account</button>
+                        <button name="sign-up" type="submit" class="btn btn-outline-secondary mt-3 myBtn">Create account</button>
                         <br>
                         <br>
                     </form>
