@@ -11,7 +11,41 @@ $result = mysqli_query($connect, $sql);
 
 $sql_name = "SELECT DISTINCT name FROM activity";
 $result_name = mysqli_query($connect, $sql_name);
-$publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
+$publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);     
+// was ist das publishers? we dont need it, right?
+
+
+
+if(isset($_POST["addtoroutine"])){
+
+    $user_id = $_SESSION['user'];
+    $activity_id = $_POST["id"];
+
+    $routine_name = "Morning Routine";
+    $routine_description = "Description of morning routine";
+
+    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
+    $sql = "INSERT INTO `routine_activity`(`id`, `fk_activity`, `fk_routine`, `fk_users`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')";
+
+    mysqli_query($connect, $routine_sql);
+    $routine_id = mysqli_insert_id($connect);
+
+    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";
+
+    if (mysqli_query($connect, $routine_activity_sql)){
+        echo "<div class='alert alert-success' role='alert'>
+        Congrats, you added a new activity to your morning routine!
+        </div>";
+        // header("refresh: 3; url = home.php");
+    }
+    else {
+        echo "<div class='alert alert-danger' role='alert'>
+                Sorry, morning routine could not get updated!
+                </div>";
+    }
+}
+
+
 
 ?>
 
@@ -145,6 +179,12 @@ $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
                                 <a href="crud_activity/show.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success">Show</a>
                                 <a href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary ms-2">Edit</a>
                                 <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
+
+                                <form method="post">
+                                    <input type="hidden" name="addtoroutine" value="1">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Morning Routine</button>
+                                </form>
                             </div>
                         </div>
 
