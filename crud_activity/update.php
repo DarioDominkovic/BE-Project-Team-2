@@ -47,8 +47,18 @@ if (isset($_POST["update"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Update Activity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styling */
+        .mt-3 {
+            margin-top: 1.5rem !important;
+        }
+
+        .btn-margin {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,14 +74,14 @@ if (isset($_POST["update"])) {
             </div>
             <div class="mb-3 mt-3">
                 <label for="duration" class="form-label">Duration</label>
-                <input type="text" class="form-control" id="duration" aria-describedby="name" name="duration" value="<?= $row["duration"] ?>">
+                <input type="time" class="form-control" id="duration" name="duration" value="<?= $row["duration"] ?>">
             </div>
             <div class="mb-3 mt-3">
-                <label for="activity_order" class="form-label">Activity order</label>
-                <input type="text" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" value="<?= $row["activity_order"] ?>">
+                <label for="activity_order" class="form-label">Activity Order</label>
+                <input type="number" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" value="<?= $row["activity_order"] ?>" min="1" max="50">
             </div>
             <div class="mb-3 mt-3">
-                <label for="activity_points" class="form-label">Activity points</label>
+                <label for="activity_points" class="form-label">Activity Points</label>
                 <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
             </div>
             <div class="mb-3 mt-3">
@@ -91,10 +101,12 @@ if (isset($_POST["update"])) {
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="update" type="submit" class="btn btn-outline-primary">Update product</button>
-            <a href="../index.php" class="btn btn-outline-secondary">Back to home page</a>
+            <button name="update" type="submit" class="btn btn-outline-primary btn-margin">Update Activity</button>
+            <a href="../index.php" class="btn btn-outline-secondary btn-margin">Back to Home Page</a>
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -41,10 +41,21 @@ if (isset($_POST["create"])) {
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Create a New Activity</title>
+    <style>
+        /* Additional custom styling */
+        .mt-3 {
+            margin-top: 1.5rem !important;
+        }
 
+        .btn-margin {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -52,7 +63,7 @@ if (isset($_POST["create"])) {
     <?php echo $navbar ?>
 
     <div class="container mt-5">
-        <h2>Create a new Activity</h2>
+        <h2>Create a New Activity</h2>
         <form method="POST" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 <label for="name" class="form-label">Name</label>
@@ -60,25 +71,30 @@ if (isset($_POST["create"])) {
             </div>
             <div class="mb-3 mt-3">
                 <label for="duration" class="form-label">Duration</label>
-                <input type="text" class="form-control" id="duration" aria-describedby="name" name="duration">
+                <input type="time" class="form-control" id="duration" name="duration">
             </div>
             <div class="mb-3 mt-3">
-                <label for="activity_order" class="form-label">Activity order</label>
-                <input type="text" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order">
+                <label for="activity_order" class="form-label">Activity Order</label>
+                <input type="number" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" min="1" max="50">
             </div>
             <div class="mb-3 mt-3">
-                <label for="Status" class="form-label">Status</label>
-                <input type="text" class="form-control" id="Status" aria-describedby="status" name="status">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="0">Not Done</option>
+                    <option value="1">Done</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="create" type="submit" class="btn btn-outline-primary">CREATE ACTIVITY</button>
-            <a href="../index.php" class="btn btn-outline-secondary">BACK TO ACTIVITY LIST</a>
+            <button name="create" type="submit" class="btn btn-outline-primary btn-margin">CREATE ACTIVITY</button>
+            <a href="../index.php" class="btn btn-outline-secondary btn-margin">BACK TO ACTIVITY LIST</a>
         </form>
     </div>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
