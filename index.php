@@ -108,7 +108,7 @@ if(isset($_POST["addtoroutine"])){
                                     }
                                     ?>
                                 </select>
-                                <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Routine</button>
+                                <button type="submit" class="btn btn-primary" name="addtoroutine">Add to Routine</button>
                             </form>
                         </div>
 
