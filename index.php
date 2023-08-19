@@ -12,37 +12,29 @@ $result = mysqli_query($connect, $sql);
 $sql_name = "SELECT DISTINCT name FROM activity";
 $result_name = mysqli_query($connect, $sql_name);
 $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);     
-// was ist das publishers? we dont need it, right?
+// was ist das publishers? we dont need it, right? bzw. wir brauchen die ganzen 3 zeilen nicht, was machen die hier? oder für später?
+
+
+if (isset($_POST["create_routine"])) {
+    $new_routine_name = $_POST["new_routine_name"];
+    $user_id = $_SESSION['user'];
+
+    // Insert new routine with the provided name
+    $insert_routine_query = "INSERT INTO `routine` (`routine_name`, `fk_users`) VALUES ('$new_routine_name', $user_id)";
+    mysqli_query($connect, $insert_routine_query);
+}
 
 
 
 if(isset($_POST["addtoroutine"])){
 
     $user_id = $_SESSION['user'];
-    $activity_id = $_POST["id"];
+    $selected_activity_id = $_POST['id'];
+    $selected_routine_id = $_POST['selected_routine_id'];
 
-    $routine_name = "Morning Routine";
-    $routine_description = "Description of morning routine";
+    $sql_insert_activity = "INSERT INTO `routine_activity` (`fk_activity`, `fk_users`, `fk_routine`) VALUES ('$selected_activity_id', '$user_id', '$selected_routine_id')";
+    mysqli_query($connect, $sql_insert_activity);
 
-    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
-    $sql = "INSERT INTO `routine_activity`(`id`, `fk_activity`, `fk_routine`, `fk_users`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')";
-
-    mysqli_query($connect, $routine_sql);
-    $routine_id = mysqli_insert_id($connect);
-
-    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";
-
-    if (mysqli_query($connect, $routine_activity_sql)){
-        echo "<div class='alert alert-success' role='alert'>
-        Congrats, you added a new activity to your morning routine!
-        </div>";
-        // header("refresh: 3; url = home.php");
-    }
-    else {
-        echo "<div class='alert alert-danger' role='alert'>
-                Sorry, morning routine could not get updated!
-                </div>";
-    }
 }
 
 
@@ -51,7 +43,7 @@ if(isset($_POST["addtoroutine"])){
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="/components/navbar.css">
+<link rel="stylesheet" href="components/navbar.css">
 
 <head>
     <meta charset="UTF-8">
@@ -62,88 +54,11 @@ if(isset($_POST["addtoroutine"])){
 
     <!-- bootstrap css link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
 
     <title>Activities</title>
 </head>
-<style>
-    h1 {
-        padding: 15px;
-        background-color: #fbd17d;
-        display: flex;
-        justify-content: center;
-    }
 
-    h4 {
-        color: white;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .main {
-        padding: 20px;
-    }
-
-    .main img {
-        width: 100%;
-        height: 500px;
-        object-fit: cover;
-    }
-
-    .card-img-top {
-        height: 400px;
-        object-fit: cover;
-    }
-
-    .center-screen {
-        height: 10vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 10%;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .card {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0);
-        z-index: 1;
-        transition: background-color 0.3s ease;
-    }
-
-    .card:hover::before {
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .card .buttons {
-        position: absolute;
-        bottom: 50%;
-        left: 50%;
-        transform: translate(-50%, 50%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 2;
-    }
-
-    .card:hover .buttons {
-        opacity: 1;
-    }
-</style>
 </head>
 
 <body>
@@ -181,10 +96,22 @@ if(isset($_POST["addtoroutine"])){
                                 <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
 
                                 <form method="post">
-                                    <input type="hidden" name="addtoroutine" value="1">
-                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Morning Routine</button>
-                                </form>
+                                <input type="hidden" name="addtoroutine" value="1">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <select name="selected_routine_id">
+                                    <?php
+                                    $sql_user_routines = "SELECT id, routine_name FROM routine WHERE fk_users = $user_id";
+                                    $result_user_routines = mysqli_query($connect, $sql_user_routines);
+
+                                    while ($routine_row = mysqli_fetch_assoc($result_user_routines)) {
+                                        echo '<option value="' . $routine_row['id'] . '">' . $routine_row['routine_name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Routine</button>
+                            </form>
+                        </div>
+
                             </div>
                         </div>
 
@@ -196,11 +123,16 @@ if(isset($_POST["addtoroutine"])){
             }
             ?>
         </div>
+
+        <div class="container center-screen">
+        <a href="crud_activity/create.php" class="btn btn-outline-secondary"> ADD MORE ACTIVITES </a>
+        </div>
+
     </div>
 
-    <div class="container center-screen">
-        <a href="crud_activity/create.php" class="btn btn-outline-secondary"> ADD MORE ACTIVITES </a>
-    </div>
+
+
+    
 
     <!-- Add Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">

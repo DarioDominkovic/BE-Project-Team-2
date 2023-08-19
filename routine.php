@@ -7,6 +7,8 @@ $raus = "../";
 $rein = "";
 require_once "components/navbar.php";
 
+$user_id = $_SESSION['user'];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,41 +25,38 @@ require_once "components/navbar.php";
 <body>
     <?php echo $navbar ?>
 
+
     <div class="container">
         <div class="row">
             <?php
-            $user_id = $_SESSION['user'];
 
-            // a as activity & ra as routine_activity
 
-            $routine_activities_query = "SELECT a.* FROM `activity` a
-                JOIN `routine_activity` ra ON a.id = ra.fk_activity
-                WHERE ra.fk_users = $user_id";
-            
-            $routine_activities_result = mysqli_query($connect, $routine_activities_query);
+        $sql_user_routines = "SELECT DISTINCT r.id, r.routine_name 
+                            FROM routine r
+                            JOIN routine_activity ra ON r.id = ra.fk_routine
+                            WHERE ra.fk_users = ?";
+        $stmt = mysqli_prepare($connect, $sql_user_routines);
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        $result_user_routines = mysqli_stmt_get_result($stmt);
 
-            if (mysqli_num_rows($routine_activities_result) > 0) {
-                while ($row = mysqli_fetch_assoc($routine_activities_result)) {
+
+            if (mysqli_num_rows($result_user_routines) > 0) {
+                while ($row = mysqli_fetch_assoc($result_user_routines)) {
             ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <?php
-                            if (!empty($row['activity_picture'])) {
-                                if (filter_var($row['activity_picture'], FILTER_VALIDATE_URL)) {
-                                    echo '<img src="' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
-                                } else {
-                                    echo '<img src="pictures/' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
-                                }
-                            } else {
-                                echo '<img src="default-image.jpg" class="card-img-top" alt="' . $row['name'] . '">';
-                            }
-                            ?>
+                            <a href="routine_activities.php?routine_id=<?php echo $row['id']; ?>">
+                                <div class="card-body">
+                                    <h3 class="card-title"><?php echo $row['routine_name']; ?></h3>
+                                </div>
+                            </a>
                         </div>
                     </div>
             <?php
                 }
             } else {
-                echo '<div class="col"><p>No activity found in your morning routine.</p></div>';
+                echo '<div class="col"><p>No routines found.</p></div>';
             }
             ?>
         </div>
