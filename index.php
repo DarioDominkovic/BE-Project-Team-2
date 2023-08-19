@@ -9,34 +9,10 @@ require_once "components/navbar.php";
 $sql = "SELECT * FROM activity";
 $result = mysqli_query($connect, $sql);
 
-$sql_name = "SELECT DISTINCT name FROM activity";
-$result_name = mysqli_query($connect, $sql_name);
-$publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);     
+// $sql_name = "SELECT DISTINCT name FROM activity";
+// $result_name = mysqli_query($connect, $sql_name);
+// $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);     
 // was ist das publishers? we dont need it, right? bzw. wir brauchen die ganzen 3 zeilen nicht, was machen die hier? oder für später?
-
-
-if (isset($_POST["create_routine"])) {
-    $new_routine_name = $_POST["new_routine_name"];
-    $user_id = $_SESSION['user'];
-
-    // Insert new routine with the provided name
-    $insert_routine_query = "INSERT INTO `routine` (`routine_name`, `fk_users`) VALUES ('$new_routine_name', $user_id)";
-    mysqli_query($connect, $insert_routine_query);
-}
-
-
-
-if(isset($_POST["addtoroutine"])){
-
-    $user_id = $_SESSION['user'];
-    $selected_activity_id = $_POST['id'];
-    $selected_routine_id = $_POST['selected_routine_id'];
-
-    $sql_insert_activity = "INSERT INTO `routine_activity` (`fk_activity`, `fk_users`, `fk_routine`) VALUES ('$selected_activity_id', '$user_id', '$selected_routine_id')";
-    mysqli_query($connect, $sql_insert_activity);
-
-}
-
 
 
 ?>
@@ -59,6 +35,7 @@ if(isset($_POST["addtoroutine"])){
     <title>Activities</title>
 </head>
 
+
 </head>
 
 <body>
@@ -69,6 +46,21 @@ if(isset($_POST["addtoroutine"])){
     <h1>Activities</h1>
 
     <div class="container">
+
+        <div class="row">
+                <div class="col">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="new_routine_name" class="form-label">Create New Morning Routine and choose a name/ names</label>
+                            <input type="text" class="form-control" id="new_routine_name" name="new_routine_name" required>
+                            <button type="submit" class="btn btn-primary" name="create_routine">Create Routine</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+
+
+
         <div class="row">
             <?php
             if (mysqli_num_rows($result) > 0) {
@@ -93,12 +85,17 @@ if(isset($_POST["addtoroutine"])){
                             <div class="buttons d-flex justify-content-center">
                                 <a href="crud_activity/show.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success">Show</a>
                                 <a href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary ms-2">Edit</a>
-                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
-
+                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>                          
+                        
+                        
+                        
                                 <form method="post">
-                                <input type="hidden" name="addtoroutine" value="1">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <select name="selected_routine_id">
+                            <input type="hidden" name="addtoroutine" value="1">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+
+                            <div class="mb-3">
+                                <label for="selected_routine_id" class="form-label">Select Morning Routine</label>
+                                <select name="selected_routine_id" id="selected_routine_id" class="form-control">
                                     <?php
                                     $sql_user_routines = "SELECT id, routine_name FROM routine WHERE fk_users = $user_id";
                                     $result_user_routines = mysqli_query($connect, $sql_user_routines);
@@ -109,10 +106,17 @@ if(isset($_POST["addtoroutine"])){
                                     ?>
                                 </select>
                                 <button type="submit" class="btn btn-primary" name="addtoroutine">Add to Routine</button>
-                            </form>
-                        </div>
-
                             </div>
+                        </form>
+                        
+                        
+                        
+                        
+                            </div>
+
+
+
+                    </div>
                         </div>
 
                     </div>
