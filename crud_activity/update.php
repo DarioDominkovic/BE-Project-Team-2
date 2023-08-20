@@ -49,6 +49,10 @@ if (isset($_POST["update"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Activity</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="../index.css">
+       
     <style>
         /* Additional custom styling */
         .mt-3 {
@@ -58,24 +62,26 @@ if (isset($_POST["update"])) {
         .btn-margin {
             margin-right: 0.5rem;
         }
+
+        .update-activity{
+            margin: 50px 50px;
+        }
     </style>
 </head>
-
 <body>
-    <div class="container mt-5">
+    <?php echo $navbar ?>
 
-        <?php echo $navbar ?>
-
-        <h2>Update Activity</h2>
-        <form method="POST" enctype="multipart/form-data">
-            <div class="mb-3 mt-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="name" name="name" value="<?= $row["name"] ?>">
-            </div>
-            <div class="mb-3 mt-3">
-                <label for="duration" class="form-label">Duration</label>
-                <input type="time" class="form-control" id="duration" name="duration" value="<?= $row["duration"] ?>">
-            </div>
+    <h2 class="text-center mt-3">Update Activity</h2>
+        
+    <form class="update-activity" method="POST" enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="name" name="name" value="<?= $row["name"] ?>">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="duration" class="form-label">Duration</label>
+            <input type="time" class="form-control" id="duration" name="duration" value="<?= $row["duration"] ?>">
+        </div>
             <div class="mb-3 mt-3">
                 <label for="activity_order" class="form-label">Activity Order</label>
                 <input type="number" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" value="<?= $row["activity_order"] ?>" min="1" max="50">
@@ -104,7 +110,7 @@ if (isset($_POST["update"])) {
             <button name="update" type="submit" class="btn btn-outline-primary btn-margin">Update Activity</button>
             <a href="../index.php" class="btn btn-outline-secondary btn-margin">Back to Home Page</a>
         </form>
-    </div>
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

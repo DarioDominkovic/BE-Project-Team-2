@@ -29,9 +29,8 @@ $navbar .= "
             </nav>";
 if (isset($_SESSION["user"]) || isset($_SESSION["adm"])) {
     $navbar .= "
-    <button>
-    <a class='logout' href='{$raus}/login/logout.php?logout'>Logout</a> 
-    </button>";
+    <a class='logout' href='{$raus}/login/logout.php?logout'><button>Logout</button></a> 
+    ";
 }
 
 $navbar .= "
