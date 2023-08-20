@@ -15,6 +15,37 @@ $result = mysqli_query($connect, $sql);
 // was ist das publishers? we dont need it, right? bzw. wir brauchen die ganzen 3 zeilen nicht, was machen die hier? oder für später?
 
 
+if(isset($_POST["addtoroutine"])){
+
+    $user_id = $_SESSION['user'];
+    $activity_id = $_POST["id"];
+
+    $routine_name = "Morning Routine";
+    $routine_description = "Description of morning routine";
+
+    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
+    $sql = "INSERT INTO `routine_activity`(`id`, `fk_activity`, `fk_routine`, `fk_users`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')";
+
+    mysqli_query($connect, $routine_sql);
+    $routine_id = mysqli_insert_id($connect);
+
+    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";
+
+    if (mysqli_query($connect, $routine_activity_sql)){
+        echo "<div class='alert alert-success' role='alert'>
+        Congrats, you added a new activity to your morning routine!
+        </div>";
+        // header("refresh: 3; url = home.php");
+    }
+    else {
+        echo "<div class='alert alert-danger' role='alert'>
+                Sorry, morning routine could not get updated!
+                </div>";
+    }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,22 +78,9 @@ $result = mysqli_query($connect, $sql);
 
     <div class="container">
 
-        <div class="row">
-                <div class="col">
-                    <form method="post">
-                        <div class="mb-3">
-                            <label for="new_routine_name" class="form-label">Create New Morning Routine and choose a name/ names</label>
-                            <input type="text" class="form-control" id="new_routine_name" name="new_routine_name" required>
-                            <button type="submit" class="btn btn-primary" name="create_routine">Create Routine</button>
-                        </div>
-                    </form>
-                </div>
-        </div>
+    <div class="row">
 
-
-
-        <div class="row">
-            <?php
+    <?php
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
@@ -85,38 +103,14 @@ $result = mysqli_query($connect, $sql);
                             <div class="buttons d-flex justify-content-center">
                                 <a href="crud_activity/show.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success">Show</a>
                                 <a href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary ms-2">Edit</a>
-                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>                          
-                        
-                        
-                        
+                                <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
+
                                 <form method="post">
-                            <input type="hidden" name="addtoroutine" value="1">
-                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-
-                            <div class="mb-3">
-                                <label for="selected_routine_id" class="form-label">Select Morning Routine</label>
-                                <select name="selected_routine_id" id="selected_routine_id" class="form-control">
-                                    <?php
-                                    $sql_user_routines = "SELECT id, routine_name FROM routine WHERE fk_users = $user_id";
-                                    $result_user_routines = mysqli_query($connect, $sql_user_routines);
-
-                                    while ($routine_row = mysqli_fetch_assoc($result_user_routines)) {
-                                        echo '<option value="' . $routine_row['id'] . '">' . $routine_row['routine_name'] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                                <button type="submit" class="btn btn-primary" name="addtoroutine">Add to Routine</button>
+                                    <input type="hidden" name="addtoroutine" value="1">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Morning Routine</button>
+                                </form>
                             </div>
-                        </form>
-                        
-                        
-                        
-                        
-                            </div>
-
-
-
-                    </div>
                         </div>
 
                     </div>
@@ -127,6 +121,7 @@ $result = mysqli_query($connect, $sql);
             }
             ?>
         </div>
+    </div>
 
         <div class="container center-screen">
         <a href="crud_activity/create.php" class="btn btn-outline-secondary"> ADD MORE ACTIVITES </a>
