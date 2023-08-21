@@ -53,6 +53,8 @@ $row = mysqli_fetch_assoc($result);
     <!-- Navbar -->
     <?php echo $navbar ?>
 
+    <h1 class="text-center" style="padding:25px 0px">Profile</h1>
+
     <section class="mySection py-5">    
         <div class="container h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">

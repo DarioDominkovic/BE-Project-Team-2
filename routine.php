@@ -39,6 +39,8 @@ $result_user_routines = mysqli_stmt_get_result($stmt);
 <body>
     <?php echo $navbar ?>
 
+    <h1 class="text-center" style="padding:25px 0px">My Routine</h1>
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">
