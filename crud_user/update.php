@@ -38,28 +38,32 @@ if ($result) {
     $email = $_POST["email"];
     $user_picture = fileUpload($_FILES["user_picture"]);
     // $create_date = $_POST["create_date"];
-    $status = $_POST["status"];
+    // $status = $_POST["status"];  
 
     // Delete previous user picture if not default
-    if ($row["user_picture"] != "avatar.png") {
-      $picturePath = "pictures/" . $row["user_picture"];
-      if (file_exists($picturePath)) {
-        if (unlink($picturePath)) {
-          echo "<div class='text-center bg-info'>Previous picture deleted successfully.</div>";
-        } else {
-          echo "<div class='text-center bg-danger'>Error deleting previous picture.</div>";
-        }
+    if($_FILES["user_picture"]["error"] == 0){
+      /* checking if the picture name of the product is not avatar.png to remove it from pictures folder */
+      if($row["user_picture"] != "../avatar.png"){
+         unlink("../pictures/$row[user_picture]");
       }
+      $sql = "UPDATE `users` SET `fname`='$fname', `lname`='$lname', `email`='$email', `user_picture`='$user_picture[0]' WHERE id={$id}";
+    }
+    else {
+        $sql = "UPDATE `users` SET `fname`='$fname', `lname`='$lname', `email`='$email' WHERE id={$id}";
+    }
+    if (mysqli_query($connect, $sql)){
+        echo  "<div class='alert alert-success' role='alert'>
+        User has been updated! {$user_picture[1]}
+        </div>" ;
+    }
+    else  {
+        echo   "<div class='alert alert-danger' role='alert'>
+        Error found! {$user_picture[1]}
+        </div>" ; 
     }
 
-    // Perform the update query
-    $sqlUpdate = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`=NOW(),`status`='$status' WHERE id = $idToUpdate";
 
-    if (mysqli_query($connect, $sqlUpdate)) {
-      echo "<div class='text-center bg-success'>Success! User details updated.</div>";
-    } else {
-      echo "<div class='text-center bg-danger'>Error updating user details: " . mysqli_error($connect) . "</div>";
-    }
+    $sqlUpdate = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`=NOW() WHERE id = $idToUpdate";
   }
 } else {
   echo "<div class='text-center bg-danger'>Error fetching user details: " . mysqli_error($connect) . "</div>";
@@ -88,11 +92,12 @@ if ($result) {
   <div class="container mt-5">
     <h2>Update Users</h2>
     <form method="post" enctype="multipart/form-data">
-      <!-- Displaying the current values of the media record in the form for updating -->
+
       <div class="mb-3 mt-3">
         <label for="fname" class="form-label">First Name</label>
         <input type="text" class="form-control" name="fname" aria-describedby="fname" id="fname" value="<?php echo $row["fname"]; ?>" />
       </div>
+
       <div class="mb-3 mt-3">
         <label for="lname" class="form-label">Last Name</label>
         <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $row["lname"]; ?>" />
@@ -102,6 +107,7 @@ if ($result) {
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" name="username" aria-describedby="username" id="username" value="<?php echo $row["username"]; ?>" />
       </div>
+      
       <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" name="email" aria-describedby="email" id="email" value="<?php echo $row["email"]; ?>" />
@@ -113,10 +119,6 @@ if ($result) {
         <small class="text-muted">Leave blank to keep the existing picture.</small>
       </div>
 
-      <div class="mb-3 mt-3">
-        <label for="create_date" class="form-label">Date of Creation</label>
-        <input type="text" class="form-control" name="create_date" aria-describedby="create_date" id="create_date" value="<?php echo $row["create_date"]; ?>" disabled />
-      </div>
       <button type="submit" name="update_user" class="btn btn-outline-secondary">UPDATE USER</button>
     </form>
   </div>

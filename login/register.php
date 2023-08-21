@@ -90,7 +90,7 @@ if (isset($_POST["sign-up"])) {
     if (!$error) {
 
         $password = hash("sha256", $password);
-        $sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `user_picture`, `password`, create_date) VALUES ('$fname','$lname','$username','$email','$picture[0]', '$password', NOW())";
+        $sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `user_picture`, `password`) VALUES ('$fname','$lname','$username','$email','$picture[0]', '$password')";
 
         $result = mysqli_query($connect, $sql);
 
