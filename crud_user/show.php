@@ -53,11 +53,11 @@ $row = mysqli_fetch_assoc($result);
     <!-- Navbar -->
     <?php echo $navbar ?>
 
-    <section class="mySection py-5">
+    <section class="mySection py-5">    
         <div class="container h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src='pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage' alt='User Picture'>
+                    <img src='../pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage' alt='User Picture'>
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                     <form>
