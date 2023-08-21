@@ -9,29 +9,18 @@ require_once "components/navbar.php";
 $sql = "SELECT * FROM activity";
 $result = mysqli_query($connect, $sql);
 
-// $sql_name = "SELECT DISTINCT name FROM activity";
-// $result_name = mysqli_query($connect, $sql_name);
-// $publishers = mysqli_fetch_all($result_name, MYSQLI_ASSOC);     
-// was ist das publishers? we dont need it, right? bzw. wir brauchen die ganzen 3 zeilen nicht, was machen die hier? oder für später?
-
 
 if(isset($_POST["addtoroutine"])){
 
     $user_id = $_SESSION['user'];
     $activity_id = $_POST["id"];
+    $routine_id = $_POST["routine_id"];
 
-    $routine_name = "Morning Routine";
-    $routine_description = "Description of morning routine";
 
-    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
-    $sql = "INSERT INTO `routine_activity`(`id`, `fk_activity`, `fk_routine`, `fk_users`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')";
 
-    mysqli_query($connect, $routine_sql);
-    $routine_id = mysqli_insert_id($connect);
+    $sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ($activity_id,$routine_id,$user_id)";
 
-    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";
-
-    if (mysqli_query($connect, $routine_activity_sql)){
+    if (mysqli_query($connect, $sql)){
         echo "<div class='alert alert-success' role='alert'>
         Congrats, you added a new activity to your morning routine!
         </div>";
@@ -43,6 +32,17 @@ if(isset($_POST["addtoroutine"])){
                 </div>";
     }
 }
+
+$sql_user_routines = "SELECT DISTINCT r.id, r.routine_name 
+                      FROM routine r
+                      JOIN routine_activity ra ON r.id = ra.fk_routine
+                      WHERE ra.fk_users = ?";
+
+$stmt = mysqli_prepare($connect, $sql_user_routines);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['user']);
+mysqli_stmt_execute($stmt);
+$result_user_routines = mysqli_stmt_get_result($stmt);
+$all_routines = mysqli_fetch_all($result_user_routines);
 
 
 
@@ -78,7 +78,7 @@ if(isset($_POST["addtoroutine"])){
     <h1>Activities</h1>
 
     <div class="container">
-
+ 
     <div class="row">
 
     <?php
@@ -107,10 +107,22 @@ if(isset($_POST["addtoroutine"])){
                                 <a href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger ms-2">Delete</a>
 
                                 <form method="post">
-                                    <input type="hidden" name="addtoroutine" value="1">
-                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Morning Routine</button>
-                                </form>
+                                <input type="hidden" name="addtoroutine" value="1">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+
+                                <!-- Dropdown for selecting routine -->
+                                <select name="routine_id" class="form-select mb-2" required>
+                                    <option value="" disabled selected>Select Routine</option>
+                                    <?php
+                                    foreach ($all_routines as $routine) {
+                                        echo '<option value="' . $routine[0] . '">' . $routine[1] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                               
+
+                                <button type="submit" class="btn btn-primary" name="addToRoutineBtn">Add to Routine</button>
+                            </form>
                             </div>
                         </div>
 

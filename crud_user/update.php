@@ -36,13 +36,13 @@ if ($result) {
     $lname = $_POST["lname"];
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $user_picture = fileUpload($_FILES["user_picture"], "user");
-    $create_date = $_POST["create_date"];
+    $user_picture = fileUpload($_FILES["user_picture"]);
+    // $create_date = $_POST["create_date"];
     $status = $_POST["status"];
 
     // Delete previous user picture if not default
     if ($row["user_picture"] != "avatar.png") {
-      $picturePath = "./pictures/" . $row["user_picture"];
+      $picturePath = "pictures/" . $row["user_picture"];
       if (file_exists($picturePath)) {
         if (unlink($picturePath)) {
           echo "<div class='text-center bg-info'>Previous picture deleted successfully.</div>";
@@ -53,7 +53,7 @@ if ($result) {
     }
 
     // Perform the update query
-    $sqlUpdate = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`='$create_date',`status`='$status' WHERE id = $idToUpdate";
+    $sqlUpdate = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`username`='$username',`email`='$email',`user_picture`='$user_picture[0]',`create_date`=NOW(),`status`='$status' WHERE id = $idToUpdate";
 
     if (mysqli_query($connect, $sqlUpdate)) {
       echo "<div class='text-center bg-success'>Success! User details updated.</div>";
@@ -116,13 +116,6 @@ if ($result) {
       <div class="mb-3 mt-3">
         <label for="create_date" class="form-label">Date of Creation</label>
         <input type="text" class="form-control" name="create_date" aria-describedby="create_date" id="create_date" value="<?php echo $row["create_date"]; ?>" disabled />
-      </div>
-      <div class="mb-3 mt-3">
-        <label for="status" class="form-label">Status</label>
-        <select class="form-select" name="status" aria-describedby="status" id="status">
-          <option value="active" <?php echo ($row["status"] === "active") ? "selected" : ""; ?>>Active</option>
-          <option value="inactive" <?php echo ($row["status"] === "inactive") ? "selected" : ""; ?>>Inactive</option>
-        </select>
       </div>
       <button type="submit" name="update_user" class="btn btn-outline-secondary">UPDATE USER</button>
     </form>
