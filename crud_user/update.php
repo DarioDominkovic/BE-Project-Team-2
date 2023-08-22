@@ -41,25 +41,23 @@ if ($result) {
     // $status = $_POST["status"];  
 
     // Delete previous user picture if not default
-    if($_FILES["user_picture"]["error"] == 0){
+    if ($_FILES["user_picture"]["error"] == 0) {
       /* checking if the picture name of the product is not avatar.png to remove it from pictures folder */
-      if($row["user_picture"] != "../avatar.png"){
-         unlink("../pictures/$row[user_picture]");
+      if ($row["user_picture"] != "../avatar.png") {
+        unlink("../pictures/$row[user_picture]");
       }
       $sql = "UPDATE `users` SET `fname`='$fname', `lname`='$lname', `email`='$email', `user_picture`='$user_picture[0]' WHERE id={$id}";
+    } else {
+      $sql = "UPDATE `users` SET `fname`='$fname', `lname`='$lname', `email`='$email' WHERE id={$id}";
     }
-    else {
-        $sql = "UPDATE `users` SET `fname`='$fname', `lname`='$lname', `email`='$email' WHERE id={$id}";
-    }
-    if (mysqli_query($connect, $sql)){
-        echo  "<div class='alert alert-success' role='alert'>
+    if (mysqli_query($connect, $sql)) {
+      echo  "<div class='alert alert-success' role='alert'>
         User has been updated! {$user_picture[1]}
-        </div>" ;
-    }
-    else  {
-        echo   "<div class='alert alert-danger' role='alert'>
+        </div>";
+    } else {
+      echo   "<div class='alert alert-danger' role='alert'>
         Error found! {$user_picture[1]}
-        </div>" ; 
+        </div>";
     }
 
 
@@ -77,9 +75,9 @@ if ($result) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
-    <!-- CSS link -->
-    <link rel="stylesheet" href="../index.css">
+
+  <!-- CSS link -->
+  <link rel="stylesheet" href="../index.css">
 
   <title>Update Users</title>
 </head>
@@ -107,7 +105,7 @@ if ($result) {
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" name="username" aria-describedby="username" id="username" value="<?php echo $row["username"]; ?>" />
       </div>
-      
+
       <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" name="email" aria-describedby="email" id="email" value="<?php echo $row["email"]; ?>" />
