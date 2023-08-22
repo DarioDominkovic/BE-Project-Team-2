@@ -15,16 +15,9 @@
     font-family: "Montserrat", sans-serif;
 }
 
+
 body{
     background-color: var(--white);
-}
-
-a:hover{
-    color:  var(--three);
-}
-
-button:hover {
-    background-color: var(--three);
 }
 
 .mySection {
@@ -34,38 +27,77 @@ button:hover {
     min-height: 100vh;
 }
 
+a { 
+    color: inherit; 
+    font-weight: bolder;
+    text-decoration: none;
+    text-transform: uppercase;
+} 
+
+a:hover { 
+    color: var(--three); 
+    font-weight: bolder;
+    text-decoration: none;
+} 
+
+.myBtn {
+    width: 50%;
+    background-color: var(--one);
+    color: #F5F5F5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.myBtn:hover {
+    background-color: var(--three);
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* css for login */
+
 .leftLogin {
-    background-color: var(--two);
+    background-color: var(--one);
     color: var(--white);
     height: 500px; 
     width:600px;
     padding-left: 5%;
     padding-top: 5%;
     padding-right: 5%;
+    border-radius: 10%;
 }
-
-a { 
-    color: inherit; 
-    font-weight: bolder;
-    text-decoration: none;
-} 
 
 .rightLogin {
-    background-color: rgb(0, 81, 140, 0.2);
-    /* background-color: #00518C; */
-    /* background-color: rgba(244,229,194, .25); */
+    background-color: rgba(35,49,66, 0.7);
+    color: var(--white);
     height: 500px; 
     width: 600px;
-    padding-top: 5%;
+    padding: 70px 50px;
+    border-radius: 10%;
 }
 
-.myBtn {
-    width: 50%;
-    background-color: #00518C;
-    color: #F5F5F5;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/* css for register */
+
+.rightRegister {
+    background-color:var(--one);
+    color: var(--white);
+    height: 700px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+    padding: 0px 20px;
 }
 
-.myBtn:hover {
-    color: #00518C;
+.leftRegister {
+    background-color:rgba(35,49,66, 0.7);
+    color: var(--white);
+    height: 700px; 
+    padding-top: 3%;
+    border-radius: 10%;
+    padding: 50px 60px;
 }
