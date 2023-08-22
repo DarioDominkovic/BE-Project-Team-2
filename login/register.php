@@ -118,7 +118,7 @@ if (isset($_POST["sign-up"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="login.css">
     <title>Sign up</title>
 </head>
 
@@ -158,7 +158,7 @@ if (isset($_POST["sign-up"])) {
                             <input type="password" class="form-control" id="password" name="password" placeholder="Type your password">
                             <span class="text-danger"><?= $password_error ?></span>
                         </div>
-                        <button name="sign-up" type="submit" class="btn btn-outline-secondary mt-3 myBtn">Create account</button>
+                        <button name="sign-up" type="submit" class="btn mt-3 myBtn">Create account</button>
                         <br>
                         <br>
                     </form>
@@ -168,7 +168,7 @@ if (isset($_POST["sign-up"])) {
                     <br>
                     <h5>To login, please register first!</h5>
                     <br>
-                    <span>You already have an account? <br> <a href="login.php" style="color: black">login here</a></span>
+                    <span>You already have an account? <br><br> <a href="login.php">login here</a></span>
                 </div>
             </div>
         </div>

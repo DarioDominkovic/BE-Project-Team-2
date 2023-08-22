@@ -26,6 +26,7 @@ if (isset($_GET["id"])) {
 
   <!-- CSS link -->
   <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="show.css">
 
 </head>
 
@@ -44,21 +45,21 @@ if (isset($_GET["id"])) {
               <p>Name: <?= isset($row["name"]) ? $row["name"] : "" ?></p>
             </h5>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <p>Duration: <?= isset($row["duration"]) ? $row["duration"] : "" ?></p>
-            </li>
-            <li class="list-group-item">
-              <p>Status: <?= ($row["status"] == 1) ? 'Done' : 'Not Done' ?></p>
-            </li>
-            <li class="list-group-item">
-              <p>Activity_Points: <?= isset($row["activity_points"]) ? $row["activity_points"] : "" ?></p>
-            </li>
-            <li class="list-group-item">
-              <p>Activity_Order: <?= isset($row["activity_order"]) ? $row["activity_order"] : "" ?></p>
-            </li>
-            </li>
-          </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p>Duration: <?= isset($row["duration"]) ? $row["duration"] : "" ?></p>
+              </li>
+              <li class="list-group-item">
+                <p>Status: <?= ($row["status"] == 1) ? 'Done' : 'Not Done' ?></p>
+              </li>
+              <li class="list-group-item">
+                <p>Activity_Points: <?= isset($row["activity_points"]) ? $row["activity_points"] : "" ?></p>
+              </li>
+              <li class="list-group-item">
+                <p>Activity_Order: <?= isset($row["activity_order"]) ? $row["activity_order"] : "" ?></p>
+              </li>
+              </li>
+            </ul>
           <div>
             <a href='../index.php' class='btn btn-outline-success'>BACK TO ACTIVITY LIST</a>
           </div>
