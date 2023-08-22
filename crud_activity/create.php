@@ -38,30 +38,21 @@ if (isset($_POST["create"])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Include Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- favicon link -->
+    <link rel="icon" type="pictures/png" href="pictures/logo.png">
+
+    <!-- bootstrap css link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
     <!-- CSS link -->
     <link rel="stylesheet" href="../index.css">
 
-    <title>Create a New Activity</title>
-    <style>
-        /* Additional custom styling */
-        .mt-3 {
-            margin-top: 1.5rem !important;
-        }
-
-        .btn-margin {
-            margin-right: 0.5rem;
-        }
-    </style>
+    <title>Create new activity</title>
 </head>
-
 <body>
 
     <?php echo $navbar ?>

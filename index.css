@@ -116,6 +116,8 @@ header{
 }
 .nav_links li a {
     transition: all 0.3 ease 0s;
+    color: var(--white);
+    text-decoration: none;
 }
 .nav_links li a:hover{
     color: var(--three);
@@ -133,3 +135,11 @@ header button{
 header button:hover{
     background-color: var(--three);
 }
+
+
+/* ----------------------------------- PROFILE ----------------------------------- */
+
+.profile-   image{
+
+}
+

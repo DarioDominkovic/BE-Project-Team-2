@@ -8,10 +8,10 @@ $id = $_GET["id"];
 if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     $delete = "DELETE FROM `activity` WHERE id = $id";
     
-    require_once "../components/db_connect.php"; // Reopen the connection before executing the delete query
+    require_once "../components/db_connect.php";
     
     if(mysqli_query($connect, $delete)){
-        mysqli_close($connect); // Close the connection after the delete query
+        mysqli_close($connect);
         header("Location:../index.php");
         exit();
     } else {

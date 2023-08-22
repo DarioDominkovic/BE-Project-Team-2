@@ -14,17 +14,21 @@ if(isset($_POST["addtoroutine"])){
 
     $user_id = $_SESSION['user'];
     $activity_id = $_POST["id"];
-    $routine_id = $_POST["routine_id"];
 
+    $routine_name = "Change Routine Name";
+    $routine_description = "Add Routine Description";
 
+    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
 
-    $sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ($activity_id,$routine_id,$user_id)";
+    mysqli_query($connect, $routine_sql);
 
-    if (mysqli_query($connect, $sql)){
+    $routine_id = mysqli_insert_id($connect);
+    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";
+    
+    if (mysqli_query($connect, $routine_activity_sql)){
         echo "<div class='alert alert-success' role='alert'>
         Congrats, you added a new activity to your morning routine!
         </div>";
-        // header("refresh: 3; url = home.php");
     }
     else {
         echo "<div class='alert alert-danger' role='alert'>
@@ -32,20 +36,6 @@ if(isset($_POST["addtoroutine"])){
                 </div>";
     }
 }
-
-$sql_user_routines = "SELECT DISTINCT r.id, r.routine_name 
-                      FROM routine r
-                      JOIN routine_activity ra ON r.id = ra.fk_routine
-                      WHERE ra.fk_users = ?";
-
-$stmt = mysqli_prepare($connect, $sql_user_routines);
-mysqli_stmt_bind_param($stmt, "i", $_SESSION['user']);
-mysqli_stmt_execute($stmt);
-$result_user_routines = mysqli_stmt_get_result($stmt);
-$all_routines = mysqli_fetch_all($result_user_routines);
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +46,7 @@ $all_routines = mysqli_fetch_all($result_user_routines);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- favicon link -->
-    <link rel="icon" type="pictures/png" href="images/favicon-book.png">
+    <link rel="icon" type="pictures/png" href="pictures/logo.png">
 
     <!-- bootstrap css link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -65,10 +55,6 @@ $all_routines = mysqli_fetch_all($result_user_routines);
 
     <title>Activities</title>
 </head>
-
-
-</head>
-
 <body>
     <!-- Navbar -->
     <?php echo $navbar ?>
@@ -109,14 +95,6 @@ $all_routines = mysqli_fetch_all($result_user_routines);
                                     <form method="post">
                                         <input type="hidden" name="addtoroutine" value="1">
                                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <select name="routine_id" class="form-select mb-2" required>
-                                        <option value="" disabled selected>Select Routine</option>
-                                            <?php
-                                            foreach ($all_routines as $routine) {
-                                                echo '<option value="' . $routine[0] . '">' . $routine[1] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
                                         <button type="submit" class="mt-2" name="addToRoutineBtn">Add to Routine</button>
                                     </form>
                                 </div>
