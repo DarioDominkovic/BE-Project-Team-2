@@ -2,10 +2,10 @@
 session_start();
 
 
-require_once "./components/db_connect.php";
+require_once "../components/db_connect.php";
 $error = '';
 $errorNew = '';
-require_once "components/navbar.php";
+require_once "../components/navbar.php";
 
 
 
