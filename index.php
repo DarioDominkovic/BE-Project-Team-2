@@ -6,6 +6,37 @@ $raus = "../";
 $rein = "";
 require_once "components/navbar.php";
 
+
+// ---------------------------------- THE LOGIN ALERT'S OF THE DAY CODE ----------------------------------
+
+if (isset($_SESSION['user'])) {
+    $user_id = $_SESSION['user'];
+    $user_query = "SELECT last_login_date FROM users WHERE id = $user_id";
+    $user_result = mysqli_query($connect, $user_query);
+
+    if ($user_result) {
+        $user_row = mysqli_fetch_assoc($user_result);
+        $last_login_date = $user_row['last_login_date'];
+
+        $current_date = date('Y-m-d');
+
+        if ($last_login_date !== $current_date) {
+            $update_query = "UPDATE users SET last_login_date = '$current_date' WHERE id = $user_id";
+            mysqli_query($connect, $update_query);
+
+            // first login of the day
+            echo '<div id="firstLoginAlert" class="alert alert-success">Hello! Welcome. This is your first login of the day.</div>';
+        } else {
+            // login on the same day
+            echo '<div id="subsequentLoginAlert" class="alert alert-info">Hello again! You have already logged in today.</div>';
+        }
+    } else {
+        echo "Error fetching user data: " . mysqli_error($connect);
+    }
+}
+
+// ---------------------------------- THE FIRST LOGIN ALERT OF THE DAY CODE ----------------------------------
+
 $sql = "SELECT * FROM activity";
 $result = mysqli_query($connect, $sql);
 
@@ -118,6 +149,29 @@ if(isset($_POST["addtoroutine"])){
     <!-- Add Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
+
+    <script>
+        
+    // ---------------------------------- LOGIN ALERT TIMER ----------------------------------  
+
+        setTimeout(function() {
+            var firstLoginAlert = document.getElementById("firstLoginAlert");
+            if (firstLoginAlert) {
+                firstLoginAlert.style.display = "none";
+            }
+        }, 5000);
+
+        setTimeout(function() {
+            var subsequentLoginAlert = document.getElementById("subsequentLoginAlert");
+            if (subsequentLoginAlert) {
+                subsequentLoginAlert.style.display = "none";
+            }
+        }, 5000);
+
+    // ---------------------------------- LOGIN ALERT TIMER ----------------------------------
+
+    </script>
+
 </body>
 
 </html>
