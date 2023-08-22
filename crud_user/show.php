@@ -40,7 +40,7 @@ $row = mysqli_fetch_assoc($result);
 
     <h1 class="text-center" style="padding:25px 0px">Profile</h1>
 
-    <section class="mySection py-5">    
+    <section class="mySection py-5">
         <div class="container h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="profile-image col-md-8 col-lg-7 col-xl-6 showLeft">

@@ -5,6 +5,8 @@ session_start();
 require_once "./components/db_connect.php";
 $error = '';
 $errorNew = '';
+require_once "components/navbar.php";
+
 
 
 if (isset($_POST["reset"])) {

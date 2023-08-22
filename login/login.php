@@ -88,7 +88,9 @@ if (isset($_POST["login"])) {
                     <h1 class="mt-2 mr-2">Welcome to your morning routine! </h1>
                     <br>
                     <h5 class="pb-5">To see possible morning routines, please use the login on the right!</h5>
-                    <span>You don't have an account yet? <br><br> <a href="register.php">register now</a></span>
+                    <span>You don't have an account yet? <br> <a href="register.php">register here</a></span>
+                    <br> <br>
+                    <span>forgot your password? <br> <a href="forgotpassword.php">forgot my password</a></span>
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 rightLogin">
                     <form method="post">
