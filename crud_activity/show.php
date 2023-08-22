@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
 
   <!-- CSS link -->
   <link rel="stylesheet" href="../index.css">
-  <link rel="stylesheet" href="show.css">
+  <link rel="stylesheet" href="crud_activity.css">
 
 </head>
 

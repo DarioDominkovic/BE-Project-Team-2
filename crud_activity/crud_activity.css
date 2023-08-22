@@ -20,9 +20,20 @@ body{
     background-color: var(--white);
 }
 
-span {
-    display: inline-block;
-    width: 160px;
+
+
+
+/* styling for the update */
+
+.activityUpdate {
+    background-color: rgba(35,49,66, 0.7);
+    color: var(--white);
+    align-items: center;
+    padding: 20px 20px;
+    border-radius: 5%;
+    height: 850px;
+    width: 600px;
+    margin-bottom: 100px;
 }
 
 .myBtn {
@@ -35,31 +46,5 @@ span {
 .myBtn:hover {
     background-color: var(--three);
 }
-
-.showRight {
-    position: relative;
-    background-color: rgba(35,49,66, 0.7);
-    color: var(--white);
-    height: 700px;
-    padding: 60px;
-}
-
-.showLeft {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border: 1px solid var(--one); */
-    height: 700px;
-}
-
-
-.medal {
-    position: absolute;
-    top: -5%;
-    right: -9%;
-    width: 100px;
-    z-index: 1;
-}
-
 
 

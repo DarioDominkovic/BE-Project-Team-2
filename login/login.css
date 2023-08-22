@@ -49,6 +49,7 @@ a:hover {
 
 .myBtn:hover {
     background-color: var(--three);
+    color: var(--white);
 }
 
 .form-control:focus {
