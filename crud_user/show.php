@@ -39,7 +39,7 @@ $row = mysqli_fetch_assoc($result);
 
     <h1 class="text-center" style="padding:25px 0px">Profile</h1>
 
-    <section class="mySection py-5">    
+    <section class="mySection py-5">
         <div class="container h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="profile-image col-md-8 col-lg-7 col-xl-6">
@@ -56,7 +56,7 @@ $row = mysqli_fetch_assoc($result);
                         <hr>
                         <p>Not correct? Change it!</p>
                         <p><a href="../index.php" class="btn btn-outline-dark btn-block">Back</a></p>
-                        <p><a href="../resetpassword.php" class="btn btn-outline-secondary btn-block">Reset Password</a></p>
+                        <p><a href="../login/resetpassword.php" class="btn btn-outline-secondary btn-block">Reset Password</a></p>
                         <p><a href="update.php?id" class="btn btn-outline-success btn-block">Update</a></p>
                     </form>
                 </div>
