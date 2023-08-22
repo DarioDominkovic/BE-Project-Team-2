@@ -80,6 +80,18 @@ body{
     color: var(--three);
 }
 
+#startButton {
+    color: red;
+    background-color: lightblue;
+    padding: 10px;
+}
+
+#stopButton {
+    color: red;
+    background-color: lightblue;
+    padding: 10px;
+}
+
 /* ----------------------------------- NAVBAR ----------------------------------- */
 header{
     box-sizing: border-box;
