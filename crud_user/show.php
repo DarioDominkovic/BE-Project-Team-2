@@ -25,9 +25,9 @@ $row = mysqli_fetch_assoc($result);
 
     <!-- bootstrap css link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="../index.css">
-    <link rel="stylesheet" href="show.css">
+    <link rel="stylesheet" href="crud_user.css">
 
     <title>Your Profile</title>
 </head>
@@ -47,7 +47,7 @@ $row = mysqli_fetch_assoc($result);
                     <img src='../pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage imageShow' alt='User Picture' style="max-height: 700px">
                 </div>
                 <div class="profile-info col-md-7 col-lg-5 col-xl-5 offset-xl-1 showRight">
-                <img src="../pictures/medal.png" alt="Medal" class="medal">
+                    <img src="../pictures/medal.png" alt="Medal" class="medal">
                     <form>
                         <h3 class="mb-4">Welcome to your account,</h3>
                         <h3><?php echo $row["fname"] ?> <?php echo $row["lname"] ?></h3>
@@ -60,7 +60,7 @@ $row = mysqli_fetch_assoc($result);
                         <p>Not correct? Change it!</p>
                         <br><br>
                         <p><a href="../index.php" class="btn myBtn">Back to activities</a></p>
-                        <p><a href="../resetpassword.php" class="btn myBtn">Reset password</a></p>
+                        <p><a href="../login/resetpassword.php" class="btn myBtn">Reset password</a></p>
                         <p><a href="update.php?id" class="btn myBtn">Update account</a></p>
                     </form>
                 </div>

@@ -52,6 +52,7 @@ if (isset($_POST["update"])) {
 
     <!-- CSS link -->
     <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="crud_activity.css">
        
     <style>
         /* Additional custom styling */
@@ -71,7 +72,9 @@ if (isset($_POST["update"])) {
 <body>
     <?php echo $navbar ?>
 
-    <h2 class="text-center mt-3">Update Activity</h2>
+    <h1 class="text-center mt-3">Update Activity</h1>
+
+    <div class="container mt-5 activityUpdate">
         
     <form class="update-activity" method="POST" enctype="multipart/form-data">
         <div class="mb-3 mt-3">
@@ -107,9 +110,12 @@ if (isset($_POST["update"])) {
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="update" type="submit" class="btn btn-outline-primary btn-margin">Update Activity</button>
-            <a href="../index.php" class="btn btn-outline-secondary btn-margin">Back to Home Page</a>
+            <br>
+            <button name="update" type="submit" class="btn myBtn">Update Activity</button>
+            <br><br>
+            <a href="../index.php" class="btn myBtn">Back to Home Page</a>
         </form>
+    </div>
         
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,13 +1,10 @@
 <?php
 session_start();
 
-
-require_once "./components/db_connect.php";
+require_once "../components/db_connect.php";
 $error = '';
 $errorNew = '';
-require_once "components/navbar.php";
-
-
+require_once "../components/navbar.php";
 
 if (isset($_POST["reset"])) {
   $oldPass = $_POST["oldPass"];
@@ -15,7 +12,7 @@ if (isset($_POST["reset"])) {
   $confirmPass = $_POST["confirmPass"];
 
   $id = $_SESSION["user"];
-  $sql = "select * from users where id = $id";
+  $sql = "SELECT * FROM users WHERE id = $id";
   $result = mysqli_query($connect, $sql);
   $row = mysqli_fetch_assoc($result);
 
@@ -25,16 +22,23 @@ if (isset($_POST["reset"])) {
     if ($newPass == $confirmPass) {
       $newPassHashed = hash("sha256", $newPass);
       $resultNewPass = mysqli_query($connect, "UPDATE users SET password = '$newPassHashed' WHERE id = $id");
+
       if ($resultNewPass) {
-        echo "success";
+        header("refresh:3;url=../index.php");
+        echo "your password has been changed";
+        exit();
+      } else {
+        echo "Error updating password: " . mysqli_error($connect);
       }
     } else {
       $errorNew = "The new password and confirm password are not matching";
     }
   } else {
-    $error =  "The old password is wrong";
+    $error = "The old password is wrong";
   }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -60,14 +64,14 @@ if (isset($_POST["reset"])) {
           <div class="card-body">
             <form method="POST">
               <div class="mb-3">
-                <input type="text" class="form-control" name="oldPass" placeholder="Your old password">
+                <input type="password" class="form-control" name="oldPass" placeholder="Your old password">
               </div>
               <p><?= $error ?></p>
               <div class="mb-3">
-                <input type="text" class="form-control" name="newPass" placeholder="Your new password">
+                <input type="password" class="form-control" name="newPass" placeholder="Your new password">
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control" name="confirmPass" placeholder="Confirm password">
+                <input type="password" class="form-control" name="confirmPass" placeholder="Confirm password">
               </div>
               <p><?= $errorNew ?></p>
               <div class="d-grid gap-2">

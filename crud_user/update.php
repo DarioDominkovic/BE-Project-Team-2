@@ -78,6 +78,7 @@ if ($result) {
 
   <!-- CSS link -->
   <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="crud_user.css">
 
   <title>Update Users</title>
 </head>
@@ -87,8 +88,11 @@ if ($result) {
   <?php echo $navbar ?>
   <!-- navbar ends -->
 
-  <div class="container mt-5">
-    <h2>Update Users</h2>
+
+  <h1 class="text-center" style="padding: 25px 0px">Update Users</h1>
+
+  <div class="container mt-5 userUpdate">
+
     <form method="post" enctype="multipart/form-data">
 
       <div class="mb-3 mt-3">
@@ -114,10 +118,10 @@ if ($result) {
       <div class="mb-3 mt-3">
         <label for="user_picture" class="form-label">User Picture</label>
         <input type="file" class="form-control" name="user_picture" aria-describedby="user_picture" id="user_picture" />
-        <small class="text-muted">Leave blank to keep the existing picture.</small>
+        <small>Leave blank to keep the existing picture.</small>
       </div>
-
-      <button type="submit" name="update_user" class="btn btn-outline-secondary">UPDATE USER</button>
+      <br>
+      <button type="submit" name="update_user" class="btn myBtn">UPDATE USER</button>
     </form>
   </div>
 
