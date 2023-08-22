@@ -16,7 +16,7 @@
 }
 
 body{
-    background-color: var(--w);
+    background-color: var(--white);
 }
 
 /* ----------------------------------- INDEX ----------------------------------- */
@@ -80,17 +80,6 @@ body{
     color: var(--three);
 }
 
-#startButton {
-    color: red;
-    background-color: lightblue;
-    padding: 10px;
-}
-
-#stopButton {
-    color: red;
-    background-color: lightblue;
-    padding: 10px;
-}
 
 /* ----------------------------------- NAVBAR ----------------------------------- */
 header{
@@ -149,9 +138,46 @@ header button:hover{
 }
 
 
-/* ----------------------------------- PROFILE ----------------------------------- */
+/* ----------------------------------- ROUTINE ----------------------------------- */
 
-.profile-   image{
-
+.total-container{
+    max-width: 800px;
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 100px;
+    padding:50px;
+    color: var(--white);
+    background-color: var(--one);
 }
 
+.total-info{
+}
+
+.total-timer{
+    max-width: 500px;
+    padding: 50px;
+    background-color: var(--two);
+    border-radius: 50px;
+}
+
+#output{ 
+    font-weight: bolder;
+}
+
+#startButton {
+    padding: 9px 25px;
+    background-color: var(--one);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#stopButton {
+    padding: 9px 25px;
+    background-color: var(--one);
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}

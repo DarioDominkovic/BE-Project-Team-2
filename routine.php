@@ -65,9 +65,9 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     if (mysqli_num_rows($routine_activities_result) > 0) {
         while ($row = mysqli_fetch_assoc($routine_activities_result)) {
 
-        $totalPoints += $row['activity_points']; // Add activity points to the  total
+        $totalPoints += $row['activity_points'];
         
-        $totalTime += $row['duration']; // Add activity points to the total
+        $totalTime += $row['duration'];
         $activityTimes[] = $row['duration'];
         $activityNames[] = $row['name'];
         
@@ -97,23 +97,29 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     echo '<div class="col"><p>Media not found.</p></div>';
 }
 ?>
+
+<div class="total-container">
+    <div class="total-info"></div>
     <div class="text-center">
+        <h1 class="text-center">Total</h1>
         <h3><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp&nbsp<?php echo $totalPoints; ?> Points</h3>
+        <h3><i class="fa-regular fa-clock" style="color: darkgrey;"></i>&nbsp;&nbsp;<span id="initialTime"><?php echo $totalTime; ?></span> Minutes</h3>
     </div>
     
-    <div class="text-center">
-    <h3><i class="fa-regular fa-clock" style="color: darkgrey;"></i>&nbsp;&nbsp;<span id="initialTime"><?php echo $totalTime; ?></span> Minutes</h3>
-    <button id="startButton">Start Timer</button>
-    <button id="stopButton">Stop Timer</button>
-    <p>Remaining Time: <span id="remainingTime"><?php echo $totalTime; ?></span> Minutes</p>
-    <div id="output"></div>
-    <div id="input" hidden><?php echo implode(',', $activityNames); ?></div>
-    <div id="input2" hidden><?php echo implode(',', $activityTimes); ?></div>
+    <div class="total-timer text-center">
+        <div id="input" hidden><?php echo implode(',', $activityNames); ?></div>
+        <div id="input2" hidden><?php echo implode(',', $activityTimes); ?></div>
+        <div class="py-2" id="output"></div>
+        <p><span id="remainingTime"><?php echo $totalTime; ?> Minutes</span></p>
+        <button id="startButton">Start Timer</button>
+        <button id="stopButton">Stop Timer</button>
+    </div>
 </div>
-
+    
 <script>    
     var totalMinutes = <?php echo $totalTime; ?>;
-    var totalTimeInSeconds = totalMinutes * 60; // Convert minutes to seconds
+    var totmin = totalMinutes;
+    var totalTimeInSeconds = totalMinutes * 60;
     var remainingTimeElement = document.getElementById("remainingTime");
     var activityNameElement = document.getElementById("activityName");
     var intervalId;
@@ -128,14 +134,14 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
         var minutes = Math.floor(totalTimeInSeconds / 60);
         var seconds = totalTimeInSeconds % 60;
         
-        if(minutes < totalMinutes - Number(activityTimes[0])){
+        if(minutes < totmin - Number(activityTimes[0])){
+            totmin -= Number(activityTimes[0]);
             activityNames.shift();
             activityTimes.shift();
-// was anderes
+            out.innerHTML = activityNames[0];
         }
         else{
             out.innerHTML = activityNames[0];
-
         }
         
         remainingTimeElement.textContent = minutes + "m " + seconds + "s";
@@ -150,12 +156,12 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     }
 
     document.getElementById("startButton").addEventListener("click", function() {
-        intervalId = setInterval(updateTimer, 1000);
+        intervalId = setInterval(updateTimer, 100);
     });
 
     document.getElementById("stopButton").addEventListener("click", function() {
         clearInterval(intervalId);
-        remainingTimeElement.textContent = totalMinutes + " Minutes";
+        remainingTimeElement.textContent = "STOP";
         activityNameElement.textContent = "Activity Stopped";
     });
 </script>
