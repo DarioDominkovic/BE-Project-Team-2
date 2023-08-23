@@ -11,6 +11,22 @@ $id = $_GET["id"];
 $sql = "select * from `users` WHERE id=$id";
 $result = mysqli_query($connect, $sql);
 $row = mysqli_fetch_assoc($result);
+
+// Medal function
+function medalImage($userPoints) {
+    if ($userPoints <= 100) {
+        return "../pictures-medal/bronce-medal.png";
+    } elseif ($userPoints <= 200) {
+        return "../pictures-medal/silver-medal.png";
+    } elseif ($userPoints <= 300) {
+        return "../pictures-medal/gold-medal.png";
+    } elseif ($userPoints <= 400) {
+        return "../pictures-medal/platin.png";
+    } else
+    return "../pictures-medal/diamond.png";
+}
+?>
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +63,8 @@ $row = mysqli_fetch_assoc($result);
                     <img src='../pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage imageShow' alt='User Picture' style="max-height: 700px">
                 </div>
                 <div class="profile-info col-md-7 col-lg-5 col-xl-5 offset-xl-1 showRight">
-                    <img src="../pictures/medal.png" alt="Medal" class="medal">
+                   <img src="<?php echo medalImage($row['user_points']); ?>" alt="medal" class="medal">
+
                     <form>
                         <h3 class="mb-4">Welcome to your account,</h3>
                         <h3><?php echo $row["fname"] ?> <?php echo $row["lname"] ?></h3>
