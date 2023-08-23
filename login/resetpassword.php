@@ -1,10 +1,9 @@
 <?php
 session_start();
-
+require_once "../components/navbar.php";
 require_once "../components/db_connect.php";
 $error = '';
 $errorNew = '';
-require_once "../components/navbar.php";
 
 if (isset($_POST["reset"])) {
   $oldPass = $_POST["oldPass"];
@@ -49,10 +48,41 @@ if (isset($_POST["reset"])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="../index.css">
+  <style>
+    :root {
+      --one: #233142;
+      --two: #455d7a;
+      --three: #f95959;
+      --black: #1d1d1d;
+      --white: #e3e3e3;
+    }
+
+    body {
+      color: var(--white);
+    }
+
+    .card-header {
+      background-color: var(--two);
+      color: var(--white);
+    }
+
+    .btn-outline-secondary {
+      background-color: #233142;
+      border-color: var(--two);
+      color: var(--white);
+
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: var(--three);
+    }
+  </style>
   <title>Password Reset</title>
 </head>
 
 <body>
+  <?php echo $navbar ?>
 
   <div class="container mt-5">
     <div class="row justify-content-center">
@@ -75,7 +105,7 @@ if (isset($_POST["reset"])) {
               </div>
               <p><?= $errorNew ?></p>
               <div class="d-grid gap-2">
-                <button class="btn btn-outline-primary" type="submit" name="reset">Reset password</button>
+                <button class="btn btn-outline-secondary" type="submit" name="reset">Reset password</button>
               </div>
             </form>
           </div>
@@ -83,7 +113,7 @@ if (isset($_POST["reset"])) {
       </div>
     </div>
   </div>
-
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 

@@ -26,6 +26,8 @@ if (isset($_POST["submit"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Password Reset</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+
 </head>
 
 <body>
@@ -38,11 +40,12 @@ if (isset($_POST["submit"])) {
             <form method="post">
               <div class="form-group">
                 <label for="email">Email or Username</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email or username" required>
+                <input type="text" class="form-control myInput" name="email" id="email" placeholder="Enter your email or username" required>
               </div>
               <br>
-              <button type="submit" class="btn btn-primary" name="submit">Send New Password</button>
+              <button type="submit" class="btn mt-3 myBtn" name="submit">Send New Password</button>
             </form>
+            <a href="login.php" class="btn mt-3 myBtn">Back to Log In</a>
           </div>
         </div>
       </div>
