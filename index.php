@@ -91,7 +91,7 @@ if(isset($_POST["addtoroutine"])){
 
     <h1 class="text-center" style="padding-top:25px">Activities</h1>
 
-    <h5 class="text-center" style="padding-bottom:25px; color:grey;">First create a routine and add your activities later</h5>
+    <h5 class="text-center" style="color:grey;">First create a routine and add your activities later</h5>
 
     <?php
         if (mysqli_num_rows($result) > 0) {

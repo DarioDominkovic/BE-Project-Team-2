@@ -25,7 +25,6 @@ body{
 .index-card-container{
     display: flex;
     justify-content: center;
-    margin: 0px 100px;
 }
 
 .index-card-2{
@@ -73,7 +72,7 @@ body{
 }
 
 .index-card-description a:hover{
-    background-color: var(--three);
+    background-color: va    r(--three);
     color: var(--white);
 }
 
@@ -142,7 +141,7 @@ header button:hover{
 /* ----------------------------------- ROUTINE ----------------------------------- */
 
 .total-container{
-    max-width: 800px;
+    max-width: 1000px;
     display: flex;
     justify-content: space-around;
     margin: 50px 100px;
@@ -152,10 +151,11 @@ header button:hover{
 }
 
 .total-info{
+    padding:50px;
 }
 
 .total-timer{
-    max-width: 500px;
+    height: 300px;
     padding: 50px;
     background-color: var(--two);
     border-radius: 50px;
