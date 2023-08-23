@@ -90,7 +90,7 @@ function needPoints($userPoints) {
                         <p><span><strong>Username:</strong></span> <?php echo $row["username"] ?></p>
                         <p><span><strong>Email:</strong></span> <?php echo $row["email"] ?></p>
                         <p><span><strong>Total points:</strong></span> <?php echo $row["user_points"] ?></p>
-                        <p style="font-size: 10px;"><span><strong></strong></span> You need<?php echo needPoints($row['user_points']); ?> points for next badge.</p>
+                        <p style="font-size: 12px;"><span><strong></strong></span> You need <?php echo needPoints($row['user_points']); ?> points for next badge.</p>
                         <p><span><strong>Routine <i class="fa-regular fa-circle-check"></i></strong></span> <?php echo $row["routine_done"] ?> times</p>
                         <hr>
                         <br><br>
