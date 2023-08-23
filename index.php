@@ -125,23 +125,21 @@ if(isset($_POST["addtoroutine"])){
                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button type="submit" class="mt-2" name="addToRoutineBtn">Add to Routine</button>
                 </form>
-                </div>
             </div>
         </div>
+    </div>
+
         <?php
             }
         } else {
             echo '<div class="col"><p>Media not found.</p></div>';
         }
         ?>
-        </div>
-    </div>
 
     <div class="d-block mb-3 justify-content-center text-center">
         <a href="crud_activity/create.php" class="text-center btn btn-outline-secondary my-5"> ADD MORE ACTIVITES </a>
     </div>
 
-    </div>
 
     <!-- Add Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">

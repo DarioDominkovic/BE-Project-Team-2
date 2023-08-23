@@ -14,7 +14,7 @@ $row = mysqli_fetch_assoc($result);
 if (isset($_POST["update"])) {
     /* taking values from inputs */
     $name = $_POST["name"];
-    $duration = $_POST["duration"];
+    $duration = (int)$_POST["duration"];
     $activity_order = $_POST["activity_order"];
     $status = $_POST["status"];
     $activity_points = $_POST["activity_points"];
@@ -54,7 +54,7 @@ if (isset($_POST["update"])) {
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="crud_activity.css">
        
-    <style>
+<style>
         /* Additional custom styling */
         .mt-3 {
             margin-top: 1.5rem !important;
@@ -69,6 +69,7 @@ if (isset($_POST["update"])) {
         }
     </style>
 </head>
+
 <body>
     <?php echo $navbar ?>
 
@@ -110,7 +111,7 @@ if (isset($_POST["update"])) {
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <br>
+            <br><br>
             <button name="update" type="submit" class="btn myBtn">Update Activity</button>
             <br><br>
             <a href="../index.php" class="btn myBtn">Back to Home Page</a>

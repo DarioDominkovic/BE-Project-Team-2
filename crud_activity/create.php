@@ -49,15 +49,19 @@ if (isset($_POST["create"])) {
     
     <!-- CSS link -->
     <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="crud_activity.css">
 
     <title>Create new activity</title>
 </head>
+
 <body>
 
     <?php echo $navbar ?>
 
-    <div class="container mt-5">
-        <h2>Create a New Activity</h2>
+    <h1 class="text-center mt-3">Create a new activity</h1>
+
+    <div class="container mt-5 createActivity">
+
         <form method="POST" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 <label for="name" class="form-label">Name</label>
@@ -68,14 +72,13 @@ if (isset($_POST["create"])) {
                 <input type="time" class="form-control" id="duration" name="duration">
             </div>
             <div class="mb-3 mt-3">
-                <label for="activity_order" class="form-label">Activity Order</label>
+                <label for="activity_order" class="form-label">Activity order</label>
                 <input type="number" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" min="1" max="50">
             </div>
             <div class="mb-3 mt-3">
-    <label for="activity_points" class="form-label">Activity Points</label>
-    <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" min="0">
-</div>
-
+                <label for="activity_points" class="form-label">Activity points</label>
+                <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" min="0">
+            </div>
             <div class="mb-3 mt-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" id="status" name="status">
@@ -87,8 +90,10 @@ if (isset($_POST["create"])) {
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">
             </div>
-            <button name="create" type="submit" class="btn btn-outline-primary btn-margin">CREATE ACTIVITY</button>
-            <a href="../index.php" class="btn btn-outline-secondary btn-margin">BACK TO ACTIVITY LIST</a>
+            <br><br>
+            <button name="create" type="submit" class="btn myBtn">CREATE ACTIVITY</button>
+            <br><br>
+            <a href="../index.php" class="btn myBtn">BACK TO ACTIVITY LIST</a>
         </form>
     </div>
 
