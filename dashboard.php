@@ -95,7 +95,6 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0);
-        z-index: 1;
         transition: background-color 0.3s ease;
     }
 
@@ -105,10 +104,13 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
 
     .card .buttons {
         position: absolute;
+        padding:20px;
         bottom: 50%;
+        border-radius: 15px;
         left: 50%;
         transform: translate(-50%, 50%);
         opacity: 0;
+        background-color: lightgrey;
         transition: opacity 0.3s ease;
         z-index: 2;
     }
@@ -163,10 +165,6 @@ $users = mysqli_fetch_all($result_name, MYSQLI_ASSOC);
             }
             ?>
         </div>
-    </div>
-
-    <div class="container center-screen">
-        <a href="crud_activity/create.php" class="btn btn-primary"> ADD MORE USERS </a>
     </div>
 
     <!-- Add Bootstrap JS -->
