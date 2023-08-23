@@ -18,7 +18,6 @@ if (isset($_POST["create"])) {
     $duration = $_POST["duration"];
     $activity_order = $_POST["activity_order"];
     $status = $_POST["status"];
-    $activity_pictures = $_POST["activity_pictures"];
     $activity_points = $_POST["activity_points"];
     $activity_picture = fileUpload($_FILES["activity_picture"]);
 
@@ -72,6 +71,11 @@ if (isset($_POST["create"])) {
                 <label for="activity_order" class="form-label">Activity Order</label>
                 <input type="number" class="form-control" id="activity_order" aria-describedby="activity_order" name="activity_order" min="1" max="50">
             </div>
+            <div class="mb-3 mt-3">
+    <label for="activity_points" class="form-label">Activity Points</label>
+    <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" min="0">
+</div>
+
             <div class="mb-3 mt-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" id="status" name="status">
