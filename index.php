@@ -25,10 +25,7 @@ if (isset($_SESSION['user'])) {
             mysqli_query($connect, $update_query);
 
             // first login of the day
-            echo '<div id="firstLoginAlert" class="alert alert-success">Hello! Welcome. This is your first login of the day.</div>';
-        } else {
-            // login on the same day
-            echo '<div id="subsequentLoginAlert" class="alert alert-info">Hello again! You have already logged in today.</div>';
+            echo '<div id="firstLoginAlert" class="alert alert-success">Hello! Welcome. Lets start your Routine</div>';
         }
     } else {
         echo "Error fetching user data: " . mysqli_error($connect);
