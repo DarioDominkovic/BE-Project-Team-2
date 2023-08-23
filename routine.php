@@ -96,11 +96,13 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     echo '<div class="col text-center"><p>- No routine found -</p></div>';
 }
 ?>
-<div class="container">
+<div class="container hello">
     <div class="row total-container">
         <div class="total-info col-md-6">
                 <h1 class="text-center">Total</h1>
+                <br>
                 <h3><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp&nbsp<?php echo $totalPoints; ?> Points</h3>
+                <br>
                 <h3><i class="fa-regular fa-clock" style="color: darkgrey;"></i>&nbsp;&nbsp;<span id="initialTime"><?php echo $totalTime; ?></span> Minutes</h3>
             </div>
         
@@ -113,6 +115,7 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
                 <div class="py-2" id="output"></div>
                 <p><span id="remainingTime"><?php echo $totalTime; ?> Minutes</span></p>
                 <button id="startButton">Start Timer</button>
+                <br><br>
                 <button id="stopButton">Stop Timer</button>
             </div>
         </div>
