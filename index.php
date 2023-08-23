@@ -43,12 +43,14 @@ if(isset($_POST["addtoroutine"])){
     $user_id = $_SESSION['user'];
     $activity_id = $_POST["id"];
 
-    $routine_name = "Change Routine Name";
-    $routine_description = "Add Routine Description";
+    // $routine_name = "Change Routine Name";
+    // $routine_description = "Add Routine Description";
 
-    $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
+    // $routine_sql = "INSERT INTO `routine`(`routine_name`, `description`) VALUES ('$routine_name','routine_description')";
 
-    mysqli_query($connect, $routine_sql);
+    // mysqli_query($connect, $routine_sql);
+
+    
 
     $routine_id = mysqli_insert_id($connect);
     $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`) VALUES ('$activity_id','$routine_id','$user_id')";

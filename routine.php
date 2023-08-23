@@ -14,7 +14,9 @@ $activityTimes = [];
 $user_id = $_SESSION['user'];
 $routine_activities_query = "SELECT a.*, ra.* FROM `activity` a
     JOIN `routine_activity` ra ON a.id = ra.fk_activity
-    WHERE ra.fk_users = $user_id";
+    WHERE ra.fk_users = $user_id
+    ORDER BY ra.activity_order";
+
 $routine_activities_result = mysqli_query($connect, $routine_activities_query);
 
 if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
