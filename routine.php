@@ -11,6 +11,8 @@ $totalTime = 0;
 $activityNames = [];
 $activityTimes = [];
 
+$maxlist= 0;
+
 $user_id = $_SESSION['user'];
 $routine_activities_query = "SELECT a.*, ra.* FROM `activity` a
     JOIN `routine_activity` ra ON a.id = ra.fk_activity
@@ -64,12 +66,24 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     <?php
     
     if (mysqli_num_rows($routine_activities_result) > 0) {
+        $activityCount = mysqli_num_rows($routine_activities_result);
+        
+        $i = 0;
         while ($row = mysqli_fetch_assoc($routine_activities_result)) {
             $totalPoints += $row['activity_points'];
             $totalTime += $row['duration'];
             $activityTimes[] = $row['duration'];
             $activityNames[] = $row['name'];
-    
+            $hideDecrease = "";
+
+            // Hide the decrease button
+            if ($row['activity_order'] == 0) {
+                $hideDecrease = 'style="display: none;"'; 
+            }
+            
+            // Check  last activity
+            $hideIncrease = ($i === $activityCount - 1) ? 'style="display: none;"' : ''; 
+        
             echo '<div class="index-card-container">
                 <div class="index-card-2">       
                     <div class="index-card-image">';
@@ -90,16 +104,18 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
                         
                         <!-- Form to update activity order -->
                         <form method="post" action="update_activity_order.php" class="d-flex justify-content-center align-items-center">
-                            <input type="hidden" name="activity_id" value="' . $row['id'] . '">
-                            <button type="submit" name="increaseOrder" class="btn btn-primary mx-1">+</button>
-                            <h3 class="text-center mx-2">' . $row['activity_order'] . '</h3>
-                            <button type="submit" name="decreaseOrder" class="btn btn-danger mx-1">-</button>
-                        </form>
+                        <input type="hidden" name="activity_id" value="' . $row['id'] . '">
+                        <button type="submit" name="increaseOrder" class="btn btn-primary mx-1" ' . $hideIncrease . '>+</button>
+                        <h3 class="text-center mx-2">' . $row['activity_order'] . '</h3>
+                        <button type="submit" name="decreaseOrder" class="btn btn-danger mx-1" '. $hideDecrease. '>-</button>
+                    </form>
                           
                         <a class="d-block mt-3 justify-content-center text-center rounded-pill text-uppercase" href="routine.php?deleteRoutine=true&id=' . $row['id'] . '" class="btn ms-2">Delete</a>
                     </div>
                 </div>
             </div>';
+
+            $i++;
         }
     } else {
         echo '<div class="col text-center"><p>- No routine found -</p></div>';
