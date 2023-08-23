@@ -65,38 +65,46 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     
     if (mysqli_num_rows($routine_activities_result) > 0) {
         while ($row = mysqli_fetch_assoc($routine_activities_result)) {
-
-        $totalPoints += $row['activity_points'];
-        
-        $totalTime += $row['duration'];
-        $activityTimes[] = $row['duration'];
-        $activityNames[] = $row['name'];
-        
-        echo '<div class="index-card-container">
-            <div class="index-card-2">       
-                <div class="index-card-image">';
-        if (!empty($row['activity_picture'])) {
-            if (filter_var($row['activity_picture'], FILTER_VALIDATE_URL)) {
-                echo '<img src="' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+            $totalPoints += $row['activity_points'];
+            $totalTime += $row['duration'];
+            $activityTimes[] = $row['duration'];
+            $activityNames[] = $row['name'];
+    
+            echo '<div class="index-card-container">
+                <div class="index-card-2">       
+                    <div class="index-card-image">';
+            if (!empty($row['activity_picture'])) {
+                if (filter_var($row['activity_picture'], FILTER_VALIDATE_URL)) {
+                    echo '<img src="' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+                } else {
+                    echo '<img src="pictures/' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+                }
             } else {
-                echo '<img src="pictures/' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+                echo '<img src="default-image.jpg" class="card-img-top" alt="' . $row['name'] . '">';
             }
-        } else {
-            echo '<img src="default-image.jpg" class="card-img-top" alt="' . $row['name'] . '">';
-        }
-        echo '</div>
-                <div class="index-card-description">
-                    <h3 class="text-center">' . $row['name'] . '</h3>
-                    <h3 class="text-center"><i class="fa-regular fa-clock" style="color: darkgrey;"></i> &nbsp;&nbsp;' . $row['duration']. '&nbsp;min </h3>
-                    <h3 class="text-center"><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp;&nbsp;' . $row['activity_points'] . '&nbsp;Points</h3>    
-                    <a class="d-block mt-3 justify-content-center text-center rounded-pill text-uppercase" href="routine.php?deleteRoutine=true&id=' . $row['id'] . '" class="btn ms-2">Delete</a>
+            echo '</div>
+                    <div class="index-card-description">
+                        <h3 class="text-center">' . $row['name'] . '</h3>
+                        <h3 class="text-center"><i class="fa-regular fa-clock" style="color: darkgrey;"></i> &nbsp;&nbsp;' . $row['duration']. '&nbsp;min </h3>
+                        <h3 class="text-center"><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp;&nbsp;' . $row['activity_points'] . '&nbsp;Points</h3>  
+                        
+                        <!-- Form to update activity order -->
+                        <form method="post" action="update_activity_order.php" class="d-flex justify-content-center align-items-center">
+                            <input type="hidden" name="activity_id" value="' . $row['id'] . '">
+                            <button type="submit" name="increaseOrder" class="btn btn-primary mx-1">+</button>
+                            <h3 class="text-center mx-2">' . $row['activity_order'] . '</h3>
+                            <button type="submit" name="decreaseOrder" class="btn btn-danger mx-1">-</button>
+                        </form>
+                          
+                        <a class="d-block mt-3 justify-content-center text-center rounded-pill text-uppercase" href="routine.php?deleteRoutine=true&id=' . $row['id'] . '" class="btn ms-2">Delete</a>
+                    </div>
                 </div>
-            </div>
-        </div>';
+            </div>';
+        }
+    } else {
+        echo '<div class="col text-center"><p>- No routine found -</p></div>';
     }
-} else {
-    echo '<div class="col text-center"><p>- No routine found -</p></div>';
-}
+
 ?>
 <div class="container hello">
     <div class="row total-container">
