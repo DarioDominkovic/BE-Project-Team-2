@@ -14,16 +14,17 @@ $row = mysqli_fetch_assoc($result);
 
 // Medal function
 function medalImage($userPoints) {
-    if ($userPoints <= 100) {
+    if ($userPoints <= 1000) {
         return "../pictures-medal/bronce-medal.png";
-    } elseif ($userPoints <= 200) {
+    } elseif ($userPoints <= 2000) {
         return "../pictures-medal/silver-medal.png";
-    } elseif ($userPoints <= 300) {
+    } elseif ($userPoints <= 3000) {
         return "../pictures-medal/gold-medal.png";
-    } elseif ($userPoints <= 400) {
-        return "../pictures-medal/platin.png";
-    } else
-    return "../pictures-medal/diamond.png";
+    } elseif ($userPoints <= 4000) {
+        return "../pictures-medal/platin-medal.png";
+    } else{
+    return "../pictures-medal/diamond-medal.png";
+}
 }
 ?>
 
@@ -72,6 +73,7 @@ function medalImage($userPoints) {
                         <p><span><strong>Username:</strong></span> <?php echo $row["username"] ?></p>
                         <p><span><strong>Email:</strong></span> <?php echo $row["email"] ?></p>
                         <p><span><strong>Total points:</strong></span> <?php echo $row["user_points"] ?></p>
+                        <p><span><strong>Routine completed:</strong></span> <?php echo $row["routine_done"] ?></p>
                         <hr>
                         <p>Not correct? Change it!</p>
                         <br><br>

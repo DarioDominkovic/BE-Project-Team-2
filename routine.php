@@ -28,7 +28,6 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
         echo "Error";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +93,7 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
         </div>';
     }
 } else {
-    echo '<div class="col"><p>Media not found.</p></div>';
+    echo '<div class="col text-center"><p>- No routine found -</p></div>';
 }
 ?>
 
@@ -104,11 +103,14 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
         <h1 class="text-center">Total</h1>
         <h3><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp&nbsp<?php echo $totalPoints; ?> Points</h3>
         <h3><i class="fa-regular fa-clock" style="color: darkgrey;"></i>&nbsp;&nbsp;<span id="initialTime"><?php echo $totalTime; ?></span> Minutes</h3>
+        
     </div>
     
     <div class="total-timer text-center">
+        <div id="activityName"></div>
         <div id="input" hidden><?php echo implode(',', $activityNames); ?></div>
         <div id="input2" hidden><?php echo implode(',', $activityTimes); ?></div>
+        <div id="input3" hidden><?php echo $totalPoints ?></div>
         <div class="py-2" id="output"></div>
         <p><span id="remainingTime"><?php echo $totalTime; ?> Minutes</span></p>
         <button id="startButton">Start Timer</button>
@@ -129,6 +131,9 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
     const activityNames = input.innerHTML.split(',');
     const input2 = document.getElementById("input2");
     const activityTimes = input2.innerHTML.split(',');
+    let totalpoints = document.getElementById("input3").innerHTML;
+    totalpoints = Number(totalpoints);
+
 
     function updateTimer() {
         var minutes = Math.floor(totalTimeInSeconds / 60);
@@ -150,13 +155,20 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
             clearInterval(intervalId);
             remainingTimeElement.textContent = "Time's up!";
             activityNameElement.textContent = "Activity Completed";
+            let xhr = new XMLHttpRequest ;
+            xhr.open("get", `update_userpoints.php?newpoints=${totalpoints}`);
+            xhr.onload = function(){
+                console.log(this.responseText);
+            };
+            xhr.send();
+
         } else {
             totalTimeInSeconds--;
         }
     }
 
     document.getElementById("startButton").addEventListener("click", function() {
-        intervalId = setInterval(updateTimer, 100);
+        intervalId = setInterval(updateTimer, 10);
     });
 
     document.getElementById("stopButton").addEventListener("click", function() {
