@@ -188,4 +188,17 @@ header button:hover{
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
+/* Media Query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+    .index-card-2 {
+        flex-direction: column;
+        height: 400px;
+        margin: 220px;
+    }
+
+    .index-card-description{
+        margin: 30px 80px;
+    z-index: 99;
+    }
+}
 

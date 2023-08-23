@@ -16,7 +16,7 @@ if (isset($_POST["update"])) {
     $name = $_POST["name"];
     $duration = (int)$_POST["duration"];
     $activity_order = $_POST["activity_order"];
-    $status = $_POST["status"];
+    // $status = $_POST["status"];
     $activity_points = $_POST["activity_points"];
     $activity_picture = fileUpload($_FILES["activity_picture"], "crud_activity"); // Use correct input name
     /* checking if a picture has been selected */
@@ -25,9 +25,9 @@ if (isset($_POST["update"])) {
         if ($row["activity_picture"] != "morning.png") {
             unlink("../pictures/$row[activity_picture]");
         }
-        $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`status`='$status',`activity_picture`='$activity_picture[0]' WHERE id={$id}";
+        $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`activity_picture`='$activity_picture[0]' WHERE id={$id}";
     } else {
-        $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order',`status`='$status' WHERE id={$id}";
+        $sql = "UPDATE `activity` SET `name`='$name',`duration`='$duration',`activity_order`='$activity_order' WHERE id={$id}";
     }
     if (mysqli_query($connect, $sql)) {
         echo "<div class='alert alert-success' role='alert'>
@@ -94,19 +94,7 @@ if (isset($_POST["update"])) {
                 <label for="activity_points" class="form-label">Activity Points</label>
                 <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" value="<?= $row["activity_points"] ?>">
             </div>
-            <div class="mb-3 mt-3">
-                <label for="status" class="form-label">Activity Status</label>
-                <fieldset>
-                    <div>
-                        <input type="radio" name="status" value="1" <?= ($row["status"] == 1) ? "checked" : ""; ?> />
-                        <label for="status">Done</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="status" value="0" <?= ($row["status"] == 0) ? "checked" : ""; ?> />
-                        <label for="status">Not Done</label>
-                    </div>
-                </fieldset>
-            </div>
+
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>
                 <input type="file" class="form-control" id="activity_picture" aria-describedby="activity_picture" name="activity_picture">

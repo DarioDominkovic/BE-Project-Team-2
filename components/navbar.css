@@ -1,0 +1,33 @@
+/* Media Query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+  .nav_links {
+      display: none; /* Hide the navigation links by default on small screens */
+      text-align: center;
+  }
+
+  .nav-toggle:checked + nav .nav_links {
+      display: block; /* Show the navigation links when the toggle is checked */
+  }
+
+  .nav-toggle-label {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+  }
+
+  .nav-toggle-label span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background-color: #333;
+      margin-bottom: 5px;
+  }
+
+  .logout {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+  }
+}
