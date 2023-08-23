@@ -27,7 +27,6 @@ function medalImage($userPoints) {
 }
 ?>
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
