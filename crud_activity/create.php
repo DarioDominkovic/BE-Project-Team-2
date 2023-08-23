@@ -17,11 +17,11 @@ if (isset($_POST["create"])) {
     $name = $_POST["name"];
     $duration = $_POST["duration"];
     $activity_order = $_POST["activity_order"];
-    $status = $_POST["status"];
+    // $status = $_POST["status"];
     $activity_points = $_POST["activity_points"];
     $activity_picture = fileUpload($_FILES["activity_picture"]);
 
-    $sql = "INSERT INTO activity (`name`, `duration`, `activity_order`, `status`, `activity_picture`, `activity_points`) VALUES ('$name','$duration','$activity_order', '$status', '{$activity_picture[0]}', '$activity_points')";
+    $sql = "INSERT INTO activity (`name`, `duration`, `activity_order`, `activity_picture`, `activity_points`) VALUES ('$name','$duration','$activity_order', '{$activity_picture[0]}', '$activity_points')";
     if (mysqli_query($connect, $sql)) {
         echo "<div class='alert alert-success' role='alert'>
             New record has been created, {$activity_picture[1]}
@@ -78,13 +78,6 @@ if (isset($_POST["create"])) {
             <div class="mb-3 mt-3">
                 <label for="activity_points" class="form-label">Activity points</label>
                 <input type="number" class="form-control" id="activity_points" aria-describedby="activity_points" name="activity_points" min="0">
-            </div>
-            <div class="mb-3 mt-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" id="status" name="status">
-                    <option value="0">Not Done</option>
-                    <option value="1">Done</option>
-                </select>
             </div>
             <div class="mb-3">
                 <label for="activity_picture" class="form-label">Picture</label>

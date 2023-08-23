@@ -59,14 +59,12 @@ if (isset($_GET["id"])) {
                         <br>
                         <p><span><strong>Name:</strong></span> <?= isset($row["name"]) ? $row["name"] : "" ?></p>
                         <p><span><strong>Duration:</strong></span> <?= isset($row["duration"]) ? $row["duration"] : "" ?></p>
-                        <p><span><strong>Status:</strong></span> <?= ($row["status"] == 1) ? 'Done' : 'Not Done' ?></p>
                         <p><span><strong>Points:</strong></span> <?= isset($row["activity_points"]) ? $row["activity_points"] : "" ?></p>
                         <p><span><strong>Order:</strong></span> <?= isset($row["activity_order"]) ? $row["activity_order"] : "" ?></p>
                         <br>
                         <hr>
                         <br><br>
                         <p> <a href='../index.php' class='btn myBtn'>BACK TO ACTIVITY LIST</a></p>
-                        <p><a href="../routine.php?id=<?php echo $row['id']; ?>" class="btn myBtn">ADD TO ROUTINE</a></p>
                     </form>
                 </div>
             </div>

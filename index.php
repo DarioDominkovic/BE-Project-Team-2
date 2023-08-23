@@ -125,7 +125,7 @@ if (isset($_POST["addtoroutine"])) {
                         <form method="post">
                             <input type="hidden" name="addtoroutine" value="1">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                            <button type="submit" class="mt-2" name="addToRoutineBtn">Add to Routine</button>
+                            <button type="submit" class="mt-2" name="addtoroutine">Add to Routine</button>
                         </form>
                     </div>
                 </div>
