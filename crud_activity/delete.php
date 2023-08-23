@@ -31,6 +31,16 @@ mysqli_close($connect);
     <title>Delete Confirmation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --one: #233142;
+            --two: #455d7a;
+            --three: #f95959;
+            --black: #1d1d1d ;
+            --white: #e3e3e3;
+        }
+
         body {
             display: flex;
             justify-content: center;
@@ -43,18 +53,38 @@ mysqli_close($connect);
             text-align: center;
             padding: 20px;
         }
+        .myBtn {
+            background-color: var(--one) !important;
+            color: #F5F5F5;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .myBtn:hover {
+            background-color: var(--three) !important;
+            color: var(--white);
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <!-- Display the photo using an <img> tag -->
-        <img src="../pictures/<?php echo $row["activity_picture"]; ?>" alt="<?php echo $row["name"]; ?>" width="200" height="200">
+        <?php
+                if (!empty($row['activity_picture'])) {
+                    if (filter_var($row['activity_picture'], FILTER_VALIDATE_URL)) {
+                        echo '<img src="' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+                    } else {
+                        echo '<img src="pictures/' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
+                    }
+                } else {
+                    echo '<img src="default-image.jpg"  class="card-img-top" alt="' . $row['name'] . '">';
+                }
+        ?>
         <h2>Delete Confirmation</h2>
         <p>Are you sure you want to delete this record?</p>
         
         <p>
-            <a href="delete.php?id=<?php echo $id; ?>&confirm=yes" class="btn btn-outline-danger">Yes</a>
-            <a href="../index.php" class="btn btn-outline-primary">No</a>
+            <a href="delete.php?id=<?php echo $id; ?>&confirm=yes" class="btn myBtn">Yes</a>
+            <a href="../index.php" class="btn myBtn">No</a>
         </p>
     </div>
     
