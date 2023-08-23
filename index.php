@@ -97,7 +97,7 @@ if(isset($_POST["addtoroutine"])){
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
     ?>  
-            
+
     <div class="index-card-container">
         <div class="index-card-2">       
             <div class="index-card-image">
@@ -128,6 +128,7 @@ if(isset($_POST["addtoroutine"])){
             </div>
         </div>
     </div>
+
 
         <?php
             }
