@@ -54,16 +54,13 @@ if (isset($_GET["id"])) {
                 <div class="profile-info col-md-7 col-lg-5 col-xl-5 offset-xl-1 showRight">
                     <form>
                         <h3 class="mb-4">Details of your choosen activity</h3>
-                        <br>
                         <hr>
-                        <br>
                         <p><span><strong>Name:</strong></span> <?= isset($row["name"]) ? $row["name"] : "" ?></p>
-                        <p><span><strong>Duration:</strong></span> <?= isset($row["duration"]) ? $row["duration"] : "" ?></p>
+                        <p><span><strong>Duration:</strong></span> <?= isset($row["duration"]) ? $row["duration"] : "" ?> minutes</p>
                         <p><span><strong>Points:</strong></span> <?= isset($row["activity_points"]) ? $row["activity_points"] : "" ?></p>
                         <p><span><strong>Order:</strong></span> <?= isset($row["activity_order"]) ? $row["activity_order"] : "" ?></p>
-                        <br>
                         <hr>
-                        <br><br>
+                        
                         <p> <a href='../index.php' class='btn myBtn'>BACK TO ACTIVITY LIST</a></p>
                     </form>
                 </div>
