@@ -32,6 +32,22 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
         echo "Error";
     }
 }
+
+if(isset($_GET["done"])){
+    while($row = mysqli_fetch_assoc($routine_activities_result)){
+        $fk_activity = $row["fk_activity"];
+        $ifExists = mysqli_query($connect, "SELECT * FROM activity_user_done WHERE fk_user = $user_id AND fk_activity = $fk_activity");
+        if($ifExists->num_rows == 0){
+            $sql = "INSERT INTO activity_user_done (Done, fk_activity, fk_user) VALUES(1 , $fk_activity , $user_id)";
+
+        }else {
+            $sql = "UPDATE activity_user_done SET Done = Done +1 WHERE fk_user = $user_id AND fk_activity = $fk_activity";
+
+        }
+        mysqli_query($connect, $sql);
+    }
+    header("Location: achievements.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +114,7 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
             }
             echo '</div>
                     <div class="index-card-description">
-                        <h3 class="text-center">' . $row['name'] . '</h3>
+                        <h3 class="text-center">' . $row['name'] . '</h3>             
                         <h3 class="text-center"><i class="fa-regular fa-clock" style="color: darkgrey;"></i> &nbsp;&nbsp;' . $row['duration']. '&nbsp;min </h3>
                         <h3 class="text-center"><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp;&nbsp;' . $row['activity_points'] . '&nbsp;Points</h3>  
                         <br>
@@ -140,7 +156,7 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
                 <div id="input3" hidden><?php echo $totalPoints ?></div>
                 <div class="py-2" id="output"></div>
                 <p><span id="remainingTime"><?php echo $totalTime; ?> Minutes</span></p>
-                <button id="startButton">Start Timer</button>
+                <div id="startButton1"><button id="startButton">Start Timer</button></div>
                 <br><br>
                 <button id="stopButton">Stop Timer</button>
             </div>
@@ -185,27 +201,50 @@ if (isset($_GET['deleteRoutine']) && isset($_GET['id'])) {
             clearInterval(intervalId);
             remainingTimeElement.textContent = "Time's up!";
             activityNameElement.textContent = "Activity Completed";
+           let button = document.createElement("button")
+           let content = document.createTextNode("Send Achievements")
+
+
+           button.setAttribute("id", "myButton")
+           button.appendChild(content)
+            document.getElementById("startButton1").firstChild.remove()
+            document.getElementById("startButton1").appendChild(button)
+            myFunction();
             let xhr = new XMLHttpRequest ;
             xhr.open("get", `update_userpoints.php?newpoints=${totalpoints}`);
             xhr.onload = function(){
                 console.log(this.responseText);
             };
             xhr.send();
-
         } else {
             totalTimeInSeconds--;
         }
     }
 
     document.getElementById("startButton").addEventListener("click", function() {
-        intervalId = setInterval(updateTimer, 10);
-    });
+intervalId = setInterval(updateTimer, 10);
+});
 
     document.getElementById("stopButton").addEventListener("click", function() {
         clearInterval(intervalId);
         remainingTimeElement.textContent = "STOP";
         activityNameElement.textContent = "Activity Stopped";
     });
+
+    function myFunction(){
+        myButton = document.getElementById("myButton")
+        myButton.addEventListener("click",()=>{
+            console.log("hello");
+        document.getElementById("startButton1").firstChild.remove()
+       let oldButton= document.createElement("button")
+       let oldButtonContent = document.createTextNode("Start Timer")
+        oldButton.appendChild(oldButtonContent)
+        oldButton.setAttribute("id", "startButton")
+        document.getElementById("startButton1").appendChild(oldButton)
+        window.location ="routine.php?done"
+
+        })
+    }
 </script>
 
 </body>
