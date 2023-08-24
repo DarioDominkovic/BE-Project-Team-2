@@ -117,15 +117,15 @@ if(isset($_GET["done"])){
                         <h3 class="text-center">' . $row['name'] . '</h3>             
                         <h3 class="text-center"><i class="fa-regular fa-clock" style="color: darkgrey;"></i> &nbsp;&nbsp;' . $row['duration']. '&nbsp;min </h3>
                         <h3 class="text-center"><i class="fa-regular fa-star" style="color: #ffff00;"></i>&nbsp;&nbsp;' . $row['activity_points'] . '&nbsp;Points</h3>  
-                        
+                        <br>
                         <!-- Form to update activity order -->
                         <form method="post" action="update_activity_order.php" class="d-flex justify-content-center align-items-center">
                         <input type="hidden" name="activity_id" value="' . $row['id'] . '">
-                        <button type="submit" name="increaseOrder" class="btn btn-primary mx-1" ' . $hideIncrease . '>+</button>
-                        <h3 class="text-center mx-2">' . $row['activity_order'] . '</h3>
-                        <button type="submit" name="decreaseOrder" class="btn btn-danger mx-1" '. $hideDecrease. '>-</button>
+                        <button type="submit" name="increaseOrder" class="btn btnIncrease mx-1" ' . $hideIncrease . '>+</button>
+                        <h3 class="text-center mx-2 spanmiddle">' . $row['activity_order'] . '</h3>
+                        <button type="submit" name="decreaseOrder" class="btn btnDecrease mx-1" '. $hideDecrease. '>-</button>
                     </form>
-                          
+                          <br>
                         <a class="d-block mt-3 justify-content-center text-center rounded-pill text-uppercase" href="routine.php?deleteRoutine=true&id=' . $row['id'] . '" class="btn ms-2">Delete</a>
                     </div>
                 </div>
