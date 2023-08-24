@@ -188,6 +188,31 @@ header button:hover{
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
+
+.btnIncrease {
+    width: 30px !important;
+}
+
+.btnDecrease {
+    width: 30px !important;}
+
+.btnIncrease:hover {
+    background-color: var(--three);
+    color: var(--white) !important;
+}
+
+.btnDecrease:hover {
+    background-color: var(--three);
+    color: var(--white) !important;
+}
+
+.spanmiddle {
+    width: 20%;
+}
+
+
+
+
 /* Media Query for screens with a maximum width of 768px */
 @media (max-width: 768px) {
     .index-card-2 {
