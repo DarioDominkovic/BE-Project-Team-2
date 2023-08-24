@@ -222,6 +222,12 @@ header button:hover{
     width: 20%;
 }
 
+.activityName {
+    text-transform: uppercase;
+    color: var(--three);
+    font-weight: bold;
+}
+
 
 
 

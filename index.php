@@ -99,6 +99,8 @@ if (isset($_POST["addtoroutine"])) {
     <h5 class="text-center" style="color:grey;">First create a routine and add your activities later</h5>
 
     <?php
+
+
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
     ?>
@@ -107,6 +109,7 @@ if (isset($_POST["addtoroutine"])) {
                 <div class="index-card-2">
                     <div class="index-card-image">
                         <?php
+                        
                         if (!empty($row['activity_picture'])) {
                             if (filter_var($row['activity_picture'], FILTER_VALIDATE_URL)) {
                                 echo '<img src="' . $row['activity_picture'] . '" class="card-img-top" alt="' . $row['name'] . '">';
@@ -125,11 +128,16 @@ if (isset($_POST["addtoroutine"])) {
                         <a class="d-block my-3 justify-content-center text-center rounded-pill text-uppercase" href="crud_activity/update.php?id=<?php echo $row['id']; ?>" class="btn ms-2">Edit</a>
                         <a class="d-block mb-3 justify-content-center text-center rounded-pill text-uppercase" href="crud_activity/delete.php?id=<?php echo $row['id']; ?>" class="btn ms-2">Delete</a>
 
+                        <?php
+                        if(isset($_SESSION["user"])) {
+?>
                         <form method="post">
                             <input type="hidden" name="addtoroutine" value="1">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <button type="submit" class="mt-2" name="addtoroutine">Add to Routine</button>
                         </form>
+                        <?php
+                    }?>
                     </div>
                 </div>
             </div>

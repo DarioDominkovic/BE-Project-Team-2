@@ -154,7 +154,7 @@ if(isset($_GET["done"])){
                 <div id="input" hidden><?php echo implode(',', $activityNames); ?></div>
                 <div id="input2" hidden><?php echo implode(',', $activityTimes); ?></div>
                 <div id="input3" hidden><?php echo $totalPoints ?></div>
-                <div class="py-2" id="output"></div>
+                <div class="py-2 activityName" id="output"></div>
                 <p><span id="remainingTime"><?php echo $totalTime; ?> Minutes</span></p>
                 <div id="startButton1"><button id="startButton">Start Timer</button></div>
                 <br><br>
@@ -228,7 +228,6 @@ intervalId = setInterval(updateTimer, 10);
     document.getElementById("stopButton").addEventListener("click", function() {
         clearInterval(intervalId);
         remainingTimeElement.textContent = "STOP";
-        activityNameElement.textContent = "Activity Stopped";
     });
 
     function myFunction(){
