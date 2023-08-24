@@ -13,7 +13,8 @@ $result = mysqli_query($connect, $sql);
 $row = mysqli_fetch_assoc($result);
 
 // Medal function
-function medalImage($userPoints) {
+function medalImage($userPoints)
+{
     if ($userPoints <= 1000) {
         return "../pictures-medal/bronce-medal.png";
     } elseif ($userPoints <= 2000) {
@@ -22,12 +23,13 @@ function medalImage($userPoints) {
         return "../pictures-medal/gold-medal.png";
     } elseif ($userPoints <= 4000) {
         return "../pictures-medal/platin-medal.png";
-    } else{
-    return "../pictures-medal/diamond-medal.png";
-}
+    } else {
+        return "../pictures-medal/diamond-medal.png";
+    }
 }
 
-function needPoints($userPoints) {
+function needPoints($userPoints)
+{
     $nextMedalPoints = 0;
 
     if ($userPoints <= 1000) {
@@ -82,7 +84,7 @@ function needPoints($userPoints) {
                     <img src='../pictures/<?php echo $row["user_picture"] ?>' class='img-fluid detailsImage imageShow' alt='User Picture' style="max-height: 700px">
                 </div>
                 <div class="profile-info col-md-7 col-lg-5 col-xl-5 offset-xl-1 showRight">
-                   <img src="<?php echo medalImage($row['user_points']); ?>" alt="medal" class="medal">
+                    <img src="<?php echo medalImage($row['user_points']); ?>" alt="medal" class="medal">
 
                     <form>
                         <h3 class="mb-4">Welcome <?php echo $row["fname"] ?> <?php echo $row["lname"] ?></h3>
@@ -96,7 +98,7 @@ function needPoints($userPoints) {
                         <br><br>
                         <p><a href="../index.php" class="btn myBtn">Back to activities</a></p>
                         <p><a href="../login/resetpassword.php" class="btn myBtn">Reset password</a></p>
-                        <p><a href="update.php?id" class="btn myBtn">Update account</a></p>
+                        <p><a href="update.php?id=<?php echo $row['id']; ?>" class="btn myBtn">Update Account</a></p>
                     </form>
                 </div>
             </div>
