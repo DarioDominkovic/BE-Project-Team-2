@@ -52,16 +52,19 @@ if (isset($_POST["addtoroutine"])) {
     $next_activity_order = ($max_order_row['max_order'] !== null) ? $max_order_row['max_order'] + 1 : 1;
 
     $routine_id = mysqli_insert_id($connect);
-    $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`, `activity_order`) VALUES ('$activity_id','$routine_id','$user_id', '$next_activity_order')";
+    $res = mysqli_query($connect, "SELECT * FROM routine_activity WHERE fk_activity = $activity_id AND fk_users = $user_id");
+
+        $routine_activity_sql = "INSERT INTO `routine_activity`(`fk_activity`, `fk_routine`, `fk_users`, `activity_order`) VALUES ('$activity_id','$routine_id','$user_id', '$next_activity_order')";
+    
 
 
-    if (mysqli_query($connect, $routine_activity_sql)) {
+    if ($res->num_rows == 0 && mysqli_query($connect, $routine_activity_sql)) {
         echo "<div class='alert alert-success' role='alert'>
         Congrats, you added a new activity to your morning routine!
         </div>";
     } else {
         echo "<div class='alert alert-danger' role='alert'>
-                Sorry, morning routine could not get updated!
+                Sorry, morning routine is already exists!
                 </div>";
     }
 }

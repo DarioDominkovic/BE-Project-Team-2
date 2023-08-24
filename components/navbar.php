@@ -15,7 +15,8 @@ if (isset($_SESSION["user"])) {
     $id = $_SESSION["user"];
     $navbar .= "
                     <li><a href='{$raus}/crud_user/show.php?id=$id'>Profile</a></li>
-                    <li><a href='{$raus}routine.php'>My Routine</a></li>";
+                    <li><a href='{$raus}routine.php'>My Routine</a></li>
+                    <li><a href='{$raus}achievements.php'>Achievements</a></li>";
 }
 
 if (isset($_SESSION["adm"])) {
