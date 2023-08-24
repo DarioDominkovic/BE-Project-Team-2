@@ -200,7 +200,7 @@ if(isset($_GET["done"])){
         if (totalTimeInSeconds <= 0) {
             clearInterval(intervalId);
             remainingTimeElement.textContent = "Time's up!";
-            activityNameElement.textContent = "Activity Completed";
+            activityNameElement.textContent = "Routine Completed";
            let button = document.createElement("button")
            let content = document.createTextNode("Send Achievements")
 

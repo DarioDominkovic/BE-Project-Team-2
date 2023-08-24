@@ -224,6 +224,7 @@ header button:hover{
 
 .activityName {
     text-transform: uppercase;
+    font-size: 25px;
     color: var(--three);
     font-weight: bold;
 }
