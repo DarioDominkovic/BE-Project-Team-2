@@ -28,7 +28,7 @@ if (isset($_SESSION['user'])) {
             mysqli_query($connect, $update_query);
 
             // first login of the day
-            echo '<div id="firstLoginAlert" class="alert alert-success">Hello! Welcome. Lets start your Routine</div>';
+            echo '<div id="firstLoginAlert" class="alert alert-success">Hello! Lets start your Routine</div>';
         }
     } else {
         echo "Error fetching user data: " . mysqli_error($connect);
@@ -167,14 +167,14 @@ if (isset($_POST["addtoroutine"])) {
             if (firstLoginAlert) {
                 firstLoginAlert.style.display = "none";
             }
-        }, 5000);
+        }, 50000);
 
         setTimeout(function() {
             var subsequentLoginAlert = document.getElementById("subsequentLoginAlert");
             if (subsequentLoginAlert) {
                 subsequentLoginAlert.style.display = "none";
             }
-        }, 5000);
+        }, 50000);
 
         // ---------------------------------- LOGIN ALERT TIMER ----------------------------------
     </script>

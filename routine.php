@@ -122,7 +122,7 @@ if(isset($_GET["done"])){
                         <form method="post" action="update_activity_order.php" class="d-flex justify-content-center align-items-center">
                         <input type="hidden" name="activity_id" value="' . $row['id'] . '">
                         <button type="submit" name="increaseOrder" class="btn btnIncrease mx-1" ' . $hideIncrease . '>+</button>
-                        <h3 class="text-center mx-2 spanmiddle">' . $row['activity_order'] . '</h3>
+                        <h3 class="text-center mx-2 spanmiddle"><i class="fa-solid fa-sort"></i></h3>
                         <button type="submit" name="decreaseOrder" class="btn btnDecrease mx-1" '. $hideDecrease. '>-</button>
                     </form>
                           <br>
