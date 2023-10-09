@@ -1,44 +1,70 @@
 <?php
+// Start a session (if not already started)
 session_start();
+
+// Include the navigation bar component
 require_once "../components/navbar.php";
+
+// Include the database connection file
 require_once "../components/db_connect.php";
+
+// Initialize error messages
 $error = '';
 $errorNew = '';
 
+// Check if the "reset" form is submitted
 if (isset($_POST["reset"])) {
+  // Get the old password, new password, and confirm password from the submitted form
   $oldPass = $_POST["oldPass"];
   $newPass = $_POST["newPass"];
   $confirmPass = $_POST["confirmPass"];
 
+  // Get the user's ID from the session (presumably, the user is logged in)
   $id = $_SESSION["user"];
+
+  // SQL query to retrieve the user's data based on their ID
   $sql = "SELECT * FROM users WHERE id = $id";
+
+  // Execute the SQL query
   $result = mysqli_query($connect, $sql);
+
+  // Fetch the user's data
   $row = mysqli_fetch_assoc($result);
 
+  // Hash the old password for comparison
   $oldPassHashed = hash("sha256", $oldPass);
 
+  // Check if the hashed old password matches the stored hashed password
   if ($oldPassHashed == $row["password"]) {
+    // Check if the new password and confirm password match
     if ($newPass == $confirmPass) {
+      // Hash the new password
       $newPassHashed = hash("sha256", $newPass);
+
+      // Update the user's password in the database with the new hashed password
       $resultNewPass = mysqli_query($connect, "UPDATE users SET password = '$newPassHashed' WHERE id = $id");
 
       if ($resultNewPass) {
+        // Redirect the user to the index page after successfully changing the password
         header("refresh:3;url=../index.php");
-        echo "your password has been changed";
+        echo "Your password has been changed";
         exit();
       } else {
+        // Display an error message if there was an issue updating the password
         echo "Error updating password: " . mysqli_error($connect);
       }
     } else {
+      // Display an error message if the new password and confirm password don't match
       $errorNew = "The new password and confirm password are not matching";
     }
   } else {
+    // Display an error message if the old password is incorrect
     $error = "The old password is wrong";
   }
 }
-
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

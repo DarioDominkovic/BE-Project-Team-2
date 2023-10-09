@@ -1,71 +1,90 @@
 <?php
-
+// Start a session (if not already started)
 session_start();
+
+// Include the database connection file
 require_once "../components/db_connect.php";
 
+// Redirect to the dashboard if an admin is logged in
 if (isset($_SESSION["adm"])) {
     header("Location: ../dashboard.php");
 }
+
+// Redirect to the index page if a regular user is logged in
 if (isset($_SESSION["user"])) {
     header("Location: ../index.php");
 }
 
+// Initialize variables for email, username, and error messages
 $email = $username = $password_error = $email_error = $username_error = "";
 $error = false;
 
+// Function to clean and sanitize user input
 function cleanInputs($input)
 {
-    $data = trim($input);                    // removing extra spaces, tabs, newlines out of the string
-    $data = strip_tags($data);              // removing tags from the string
-    $data = htmlspecialchars($data);        // converting special characters to HTML entities, something like "<" and ">", it will be replaced by "&lt;" and "&gt";
+    $data = trim($input);                    // Remove extra spaces, tabs, newlines from the string
+    $data = strip_tags($data);              // Remove HTML tags from the string
+    $data = htmlspecialchars($data);        // Convert special characters to HTML entities (e.g., "<" becomes "&lt;")
 
     return $data;
 }
 
+// Check if the "login" form is submitted
 if (isset($_POST["login"])) {
+    // Clean and sanitize user inputs
     $email = cleanInputs($_POST["email"]);
     $username = cleanInputs($_POST["username"]);
     $password = $_POST["password"];
 
+    // Validate that either email or username is provided
     if (empty($email) && empty($username)) {
         $error = true;
         $username_error = "Email or username is required!";
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($email)) {             // if the provided text is not a format of an email, error will be true
+    // Validate email format (if provided)
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($email)) {
         $error = true;
         $email_error = "Please enter a valid email address";
     }
-    // simple validation for the "password"
+
+    // Validate that the password is not empty
     if (empty($password)) {
         $error = true;
         $password_error = "Password can't be empty!";
     }
 
+    // If there are no validation errors, proceed to database query
     if (!$error) {
+        // Hash the password for comparison with the stored hashed password
         $password = hash("sha256", $password);
         $sql = "SELECT * FROM users WHERE (email = '$email' OR username = '$username') AND password = '$password'";
 
+        // Execute the SQL query
         $result = mysqli_query($connect, $sql);
         $row = mysqli_fetch_assoc($result);
 
+        // Check if there is exactly one matching user
         if (mysqli_num_rows($result) == 1) {
             if ($row["status"] == "user") {
+                // Set session variable for regular user and redirect
                 $_SESSION["user"] = $row["id"];
                 header("Location: ../index.php");
             } else {
+                // Set session variable for admin user and redirect
                 $_SESSION["adm"] = $row["id"];
                 header("Location: ../dashboard.php");
             }
         } else {
+            // Display an error message if login credentials are incorrect
             echo "<div class='alert alert-danger'>
                 <p>Wrong credentials, please try again...</p>
                 </div>";
         }
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

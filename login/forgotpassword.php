@@ -1,23 +1,46 @@
 <?php
+// Include the database connection file
 require_once "../components/db_connect.php";
+
+// Check if the form is submitted
 if (isset($_POST["submit"])) {
+  // Get the email from the submitted form
   $email = $_POST["email"];
+
+  // Generate a new password with 10 characters
   $length = 10;
   $newPass = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, $length);
+
+  // Hash the new password using SHA-256
   $newPassHashed = hash("sha256", $newPass);
+
+  // SQL query to check if the email or username exists in the 'users' table
   $sql = "SELECT * FROM users WHERE email = '$email' OR username = '$email'";
+
+  // Execute the SQL query
   $result = mysqli_query($connect, $sql);
+
+  // Check if exactly one row matches the email or username
   if ($result->num_rows == 1) {
+    // Fetch the user data
     $row = mysqli_fetch_assoc($result);
   }
+
+  // Update the user's password in the database with the new hashed password
   mysqli_query($connect, "UPDATE users SET password = '$newPassHashed' WHERE email = '$email' OR username= '$email'");
+
+  // Create a message to send to the user via email
   $message = "<h1>Your new password</h1>
         <p>Hey Dear {$row["fname"]}, your new password for your account is : $newPass</p>";
+
+  // Send an email to the user with the new password
   if (mail($row["email"], "New password for $email", $message)) {
+    // Display a success message if the email was sent
     echo "<h1>New password has been sent to $email, please check your email and login with the new password</h1>";
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

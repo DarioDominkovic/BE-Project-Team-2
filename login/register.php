@@ -1,24 +1,29 @@
 <?php
-
+// Start a session (if not already started)
 session_start();
 
+// Redirect to the dashboard if an admin is logged in
 if (isset($_SESSION["adm"])) {
     header("Location: ../dashboard.php");
 }
+
+// Redirect to the index page if a regular user is logged in
 if (isset($_SESSION["user"])) {
     header("Location: ../index.php");
 }
 
+// Include the database connection file
 require_once "../components/db_connect.php";
+
+// Include the file_upload function
 require_once "../components/file_upload.php";
 
+// Initialize error flags and variables
 $error = false;
-
 $fname = $lname = $username = $email = "";
 $fname_error = $lname_error = $username_error = $email_error = $password_error = "";
 
-//first_name, last_name, email, phone_number, address, image, password, status
-
+// Function to clean and sanitize user input
 function cleanInput($param)
 {
     $data = trim($param);
@@ -28,16 +33,18 @@ function cleanInput($param)
     return $data;
 }
 
+// Check if the "sign-up" form is submitted
 if (isset($_POST["sign-up"])) {
 
+    // Clean and sanitize user inputs
     $fname = cleanInput($_POST["fname"]);
     $lname = cleanInput($_POST["lname"]);
     $username = cleanInput($_POST["username"]);
     $email = cleanInput($_POST["email"]);
-    $password = $_POST["password"];
-    // kein cleanup für passwords, because special characters are allowed, so we just use the global password variable
-    $picture = fileUpload($_FILES["picture"]);
+    $password = $_POST["password"]; // No cleaning for passwords, as special characters are allowed
+    $picture = fileUpload($_FILES["picture"]); // Use the file_upload function to handle file uploads
 
+    // Validation for first name
     if (empty($fname)) {
         $error = true;
         $fname_error = "Please enter your first name!";
@@ -49,6 +56,7 @@ if (isset($_POST["sign-up"])) {
         $fname_error = "Name must contain only letters and spaces.";
     }
 
+    // Validation for last name
     if (empty($lname)) {
         $error = true;
         $lname_error = "Please enter your last name";
@@ -60,6 +68,7 @@ if (isset($_POST["sign-up"])) {
         $lname_error = "Name must contain only letters and spaces.";
     }
 
+    // Validation for username
     if (empty($username)) {
         $error = true;
         $username_error = "Please enter your username";
@@ -68,10 +77,12 @@ if (isset($_POST["sign-up"])) {
         $username_error = "Username must have at least 7 characters.";
     }
 
+    // Validation for email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = true;
         $email_error = "Please enter a valid email address";
     } else {
+        // Check if the email is already in use
         $query = "SELECT email FROM users WHERE email = '$email'";
         $result = mysqli_query($connect, $query);
         if (mysqli_num_rows($result) != 0) {
@@ -80,6 +91,7 @@ if (isset($_POST["sign-up"])) {
         }
     }
 
+    // Validation for password
     if (empty($password)) {
         $error = true;
         $password_error = "Password can't be empty!";
@@ -87,11 +99,11 @@ if (isset($_POST["sign-up"])) {
         $error = true;
         $password_error = "Password must have at least 6 characters.";
     }
+
+    // If there are no validation errors, insert the user data into the database
     if (!$error) {
-
-        $password = hash("sha256", $password);
+        $password = hash("sha256", $password); // Hash the password
         $sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `user_picture`, `password`) VALUES ('$fname','$lname','$username','$email','$picture[0]', '$password')";
-
         $result = mysqli_query($connect, $sql);
 
         if ($result) {
@@ -106,8 +118,8 @@ if (isset($_POST["sign-up"])) {
         }
     }
 }
-
 ?>
+
 
 
 
